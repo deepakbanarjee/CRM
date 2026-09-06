@@ -224,7 +224,7 @@ function letterhead(meta) {
   return els;
 }
 
-async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = false, cover = true, compact = false }) {
+async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = false, cover = true, compact = false, header = true }) {
   numberedRefs = [];
   COMPACT = compact;
   const content = parse(body, baseDir);
@@ -260,7 +260,7 @@ async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = 
     },
     sections: [{
       properties: { page: { size: landscape ? { width: 15840, height: 12240, orientation: PageOrientation.LANDSCAPE } : { width: PAGE_W, height: 15840 }, margin: compact ? { top: 600, bottom: 440, left: 880, right: 880 } : { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN } } },
-      headers: compact ? undefined : { default: new Header({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.shortTitle || meta.title, size: 16, color: GREY }), new TextRun({ text: "\t" + (meta.series || "Proposal package"), size: 16, color: GREY })] })] }) },
+      headers: (!header || compact) ? undefined : { default: new Header({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.shortTitle || meta.title, size: 16, color: GREY }), new TextRun({ text: "\t" + (meta.series || "Proposal package"), size: 16, color: GREY })] })] }) },
       footers: { default: new Footer({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.classification || "Confidential", size: 16, color: GREY }), new TextRun({ text: "\tPage ", size: 16, color: GREY }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: GREY }), new TextRun({ text: " of ", size: 16, color: GREY }), new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: GREY })] })] }) },
       children,
     }],

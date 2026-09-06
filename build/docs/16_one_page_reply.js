@@ -1,53 +1,60 @@
 module.exports = {
-  outName: "16_One_Page_Reply_to_Brief.docx",
+  outName: "16_Reply_to_Brief.docx",
   toc: false,
   cover: false,
-  compact: true,
+  compact: false,
+  header: false,
   meta: {
-    series: "RESPONSE TO REQUIREMENTS BRIEF",
-    title: "AI Executive Intelligence Assistant and CRM",
-    subtitle: "Our reading of your requirement, what we would add to it, and what we need from you",
-    shortTitle: "Response to brief",
-    to: "[Client contact name and title]",
-    from: "[Your name, your company]",
-    date: "[Date]",
-    re: "Your two-system requirement brief; request for a first meeting",
+    series: "IN RESPONSE TO YOUR BRIEF",
+    title: "AI Executive Intelligence Assistant, and CRM + Follow-up",
+    subtitle: "How we would approach both systems, what we would add beyond the minimum, and the few things we would need from you",
+    shortTitle: "Reply to brief",
     classification: "Confidential",
   },
   body: `
-Thank you for the brief. We read System 1 as a **closed-domain retrieval system with a verification layer**, not a chatbot, and System 2 as a **relationship system whose defining constraint is that nothing is sent without human approval**. We propose building both on one shared platform, so each is usable on its own but they share one login, one list of organisations and people, one document store and one audit trail. Deployment is in your own cloud account in a GCC region; you own the code, the accounts and the data.
+Thanks for sending this through. It is a clearer brief than most, and the two systems fit together more naturally than they might first appear, so we have sketched out how we would build them. Nothing below is fixed; treat it as a starting point rather than a proposal you need to react to.
 
-## What we would add beyond the stated minimum
+## How we are reading it
+
+The interesting thing about the first system is that answering questions is not really the hard part. Plenty of tools can search a folder. The hard part is being trustworthy enough that your management will act on what it says. So we would build it as a **closed-domain** system: it answers only from documents you have loaded, cites the document and page for every statement, and when the answer genuinely is not there, says so instead of guessing. That last behaviour matters more than it sounds.
+
+The second system is the opposite shape. Its records and pipelines are conventional, deliberately so. What makes it unusual is your requirement that nothing goes out without a person approving it, which we have treated as a design constraint rather than a feature: there is no automated sending path anywhere in the code, not even one switched off.
+
+We would put both on **one shared platform** so each is usable alone but they share a single login, one list of organisations and people, one document store and one audit trail. The investor named in a contract is then the same record as the investor in your pipeline, and you never maintain two contact lists. Everything runs in your own cloud account in a GCC region, with a gateway that can route sensitive documents to a model inside the country, so residency stays a setting you control. You own the code, the accounts and the data throughout.
+
+## What we would add beyond the minimum
+
+Your brief describes the minimum well. Here is where we would go a little further, and why.
 
 %widths 27,73
-| Your requirement | What we would add |
+| What you asked for | What we would add to it |
 |---|---|
-| Retrieve information; controlled access | Permissions applied inside the search, so the system never reads a passage the user may not open. Every answer cites document and page. |
-| Flag contradictions | A structured **claims ledger**: every figure, date and term extracted with its source quote, so conflicts surface across the whole document set, not just a search result. Superseded drafts are not falsely flagged. |
-| Track missing information | Configurable **decision checklists**: define once what evidence each decision requires; the system reports what is present, missing or contradicted, and flags documents referenced but never supplied. |
-| Answer in plain language | An independent **grounding check** deletes any sentence its cited source does not support, so the system declines rather than guesses. Arabic and English, including scans. |
-| Records and stage tracking | A shared entity registry, so a counterparty in a contract is the same record as the relationship in your pipeline. Configurable pipelines per category, including a GCC path. |
-| Follow-ups and reminders | Overdue and dormant relationships surfaced to management. Reminders go to your staff only, never to the contact. |
-| Human approval on outreach | Enforced in the database, not the interface, with a four-eyes rule, risk flags at submission, and full version history of every edit. |
-| Basic reporting | An immutable, hash-chained audit trail of every question, answer, approval and send, exportable for audit or regulator review. |
-| Where the AI runs | A model gateway that routes sensitive documents to an in-country model without changing the application, so residency is a setting, not a rebuild. |
+| Retrieve information; controlled access | Permissions applied **inside** the search rather than after it, so the system never even reads a passage the user may not open. Every answer cites its document and page. |
+| Flag contradictions | A structured **claims ledger**. Every figure, date and term is extracted into a comparable record alongside the sentence it came from, so conflicts surface across your whole document set, not just whatever a search returned. Superseded drafts are recognised, so an old version is not flagged against the final. |
+| Track missing information | Configurable **decision checklists**. You define once what evidence each decision needs; the system reports what is present, missing or contradicted, and spots documents referenced but never supplied. |
+| Answer in plain language | An independent **grounding check** reads the drafted answer back against its sources and deletes any sentence they do not support. If nothing survives, it declines. Arabic and English throughout, including scans. |
+| Contact and relationship records | A shared entity registry, so anything found in the documents can surface on the matching relationship. Pipelines and stages are configurable per category, including a GCC-specific path. |
+| Follow-ups and reminders | Overdue and dormant relationships surfaced to management, so nothing goes quiet unnoticed. Reminders go to your staff only, never to the contact. |
+| Human approval on outreach | The gate enforced in the database rather than the interface, with a four-eyes rule so the drafter cannot approve their own message, risk flags at submission, and a full version history. |
+| Basic reporting | An immutable, hash-chained audit trail of every question, answer, approval and send, exportable if internal audit or a regulator ever asks. |
 
+## Your four questions
 
-## Your four questions, in brief
+- **Build approach and tools.** One platform, two products, on standard components, with AI models reached through a gateway so no single vendor is load-bearing and you can change your mind later without a rewrite.
+- **Plugging in real data later.** By configuration rather than code: custom fields, configurable stages and checklists, import templates with a validation preview, and connectors for SharePoint, Drive and mailboxes. Demo data is flagged separately so it clears in a single action once real data arrives.
+- **Timeline.** A working structure of both systems at around week 6, and an integrated demo, including contradiction detection and the approval queue, at week 8 to 9. A pilot on your real documents from week 9, and production at around week 20. If it helps to see something sooner, we can show a clickable version on sample documents at week 4.
+- **Cost.** A fixed fee for a short discovery, then milestone-based fixed fees through demo, pilot and production, followed by an annual managed service. Cloud and AI usage is contracted in your name and passed through at cost. During the pilot that comes to a few hundred dollars a month, which tends to surprise people.
 
-- **Approach and tools.** One platform, two products, on standard components, with AI models behind a gateway so no vendor is load-bearing.
-- **Accepting real data later.** By configuration, not code: custom fields, configurable stages and checklists, import templates with validation preview, and connectors for SharePoint, Drive and mailboxes.
-- **Timeline.** Working structure at week 6; integrated demo, including contradiction detection and the approval queue, at week 8 to 9; pilot from week 9; production at week 20.
-- **Cost.** Fixed fee for discovery, then milestone fixed fees to demo, pilot and production, and an annual managed service. Cloud and AI usage is contracted in your name and passed through at cost; pilot running cost is a few hundred dollars per month.
+## What would help us most from you
 
-## What we need from you
+None of it is urgent, and we can start without any of it, but these are what would let us give you real numbers rather than ranges.
 
-1. **Sample documents:** 50 to 200 under NDA, mixed formats, both languages, including your worst scans. This sets our accuracy baseline.
-2. **Decision types:** the five to ten decisions management makes most often and the evidence each requires; this defines the gap tracker.
-3. **Jurisdiction and data policy:** which countries are in scope, and whether document text may be processed outside the country if stored in-region and encrypted.
-4. **Platform details:** cloud provider and region, identity provider for staff login, and the mailbox platform for approved outreach.
-5. **Ways of working:** pipeline stages and approval policy per category, anything specific to your GCC path, and existing systems to integrate with.
+1. **A handful of sample documents.** Fifty to two hundred under NDA, mixed formats, both languages, ideally your worst scans rather than your tidiest files. This is the most useful single input, because it sets a realistic accuracy baseline instead of an optimistic one.
+2. **The decisions you make most often.** Five to ten of them, and what evidence you would expect to see for each. This is what the missing-information tracker is built around.
+3. **Where the data may live.** Which countries are in scope, and whether document text may be processed outside the country if stored in-region and encrypted. This genuinely changes both design and cost, so it is worth settling early.
+4. **A few platform details.** Your cloud provider and preferred region, the identity provider your staff log in with, and the mailbox approved messages should be sent from.
+5. **How you work today.** The pipeline stages your relationship managers actually use, who should approve outreach per category, anything specific about your GCC relationships, and any existing CRM we should work alongside.
 
-Items 1 to 3 most affect scope and price; the rest can be settled in discovery. We would welcome a first meeting to present the plan.
+We have the full plan ready: architecture, timeline, and a cost model with every assumption visible. Happy to walk you through it whenever suits, with no obligation attached, or to answer anything above in writing.
 `,
 };
