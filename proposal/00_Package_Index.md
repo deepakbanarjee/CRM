@@ -1,12 +1,12 @@
 # Proposal Package: AI Executive Intelligence Assistant and CRM + Follow-up System
 
-First-meeting edition, September 2026. Sixteen documents plus diagrams. Every Word document is also provided as a PDF.
+First-meeting edition, September 2026. Seventeen documents plus diagrams. Every Word document is also provided as a PDF.
 
 ## Which documents go to the client, and when
 
 | Stage | Hand over |
 |---|---|
-| Before the meeting, in reply to their brief | 16 Reply to Brief |
+| Before the meeting, in reply to their brief | 17 Visual Reply (send this), or 16 Reply to Brief if they prefer prose |
 | First meeting (in the room) | 02 deck (presented); 01 Executive Summary (printed leave-behind) |
 | After NDA, before the detailed session | 01, 03, 04, 05, 06, 07, 08, 09, 13, 15 |
 | Detailed session and negotiation | 14 Draft Statement of Work; 05 workbook walked through together |
@@ -32,6 +32,7 @@ First-meeting edition, September 2026. Sixteen documents plus diagrams. Every Wo
 | 14 | `14_Draft_Statement_of_Work.docx` / `.pdf` | Scope, milestones, commercial model, responsibilities, IP, data protection, warranties, change control, termination | Sponsor, procurement, legal |
 | 15 | `15_Requirements_Traceability_Matrix.xlsx` | Every requirement in the brief traced to design, component, phase, acceptance test and demo step | Client IT, delivery team |
 | 16 | `16_Reply_to_Brief.docx` / `.pdf` | Two-page written reply to the client's brief, in a warm conversational register: how we read the requirement, a table of what we would add beyond the minimum, short answers to their four questions, and what would help us most from them. No placeholders; ready to send as-is | Client sponsor, sent ahead of the meeting |
+| 17 | `17_Visual_Reply_to_Brief.pdf` plus `17_Visual_Reply_page1.png` / `page2.png` | Two-page designed infographic version of document 16: the two systems as capability panels, the shared platform, the timeline as a visual track, and what we need from them as ranked cards. The PNGs are for pasting into an email or a message; the PDF is for attaching | Client sponsor, sent ahead of the meeting |
 | - | `diagrams/*.png` | Eight diagrams used across the documents and the deck | Reuse in any material |
 
 ## Reading order for the presenter
@@ -51,4 +52,4 @@ First-meeting edition, September 2026. Sixteen documents plus diagrams. Every Wo
 
 ## Rebuilding the package
 
-Sources are in `build/`. Diagrams: `python3 build/diagrams.py`. Word documents: `node build/build_docs.js` then `python3 build/finalize_docx.py proposal/*.docx` (updates tables of contents and writes PDFs; needs LibreOffice with Writer). Deck: `node build/build_deck.js`. Workbooks: `python3 build/build_cost_model.py`, `python3 build/build_risk_and_rtm.py`, then recalculate with LibreOffice.
+Sources are in `build/`. Visual reply: `NODE_PATH=$(npm root -g) node build/visual/render.js` (needs Playwright with Chromium). Diagrams: `python3 build/diagrams.py`. Word documents: `node build/build_docs.js` then `python3 build/finalize_docx.py proposal/*.docx` (updates tables of contents and writes PDFs; needs LibreOffice with Writer). Deck: `node build/build_deck.js`. Workbooks: `python3 build/build_cost_model.py`, `python3 build/build_risk_and_rtm.py`, then recalculate with LibreOffice.

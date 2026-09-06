@@ -7,7 +7,7 @@ Proposal package for a first-level client meeting, covering two interconnected s
 
 ## Contents
 
-- `proposal/` - the sixteen client-facing and presenter documents (Word, PowerPoint, Excel, PDF) and the diagrams. Start with `proposal/00_Package_Index.md`.
+- `proposal/` - the seventeen client-facing and presenter documents (Word, PowerPoint, Excel, PDF) and the diagrams. Start with `proposal/00_Package_Index.md`.
 - `build/` - the generator scripts that produce every document from source, so the package can be regenerated after edits.
 
 ## Regenerating

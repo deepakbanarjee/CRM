@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1E2761; --navy-2: #2A3578; --teal: #1C7293; --gold: #C9A227;
+    --ice: #EEF2FA; --ink: #1F2430; --muted: #5A6270; --line: #D8DEEA; --paper: #FFFFFF;
+  }
+  body { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--ink); background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 8.5in; height: 11in; padding: 0.6in 0.6in 0.5in; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+
+  .mast { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 3.5px solid var(--navy); padding-bottom: 13px; }
+  .kicker { font-size: 10px; letter-spacing: 2.8px; font-weight: 700; color: var(--teal); text-transform: uppercase; }
+  h1 { font-size: 31px; line-height: 1.14; color: var(--navy); font-weight: 700; margin-top: 7px; letter-spacing: -0.4px; }
+  .mast .right { text-align: right; font-size: 9.5px; color: var(--muted); line-height: 1.6; padding-bottom: 3px; white-space: nowrap; }
+
+  .lede { font-size: 13px; line-height: 1.58; color: var(--muted); margin: 17px 0 22px; max-width: 7in; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .sec { display: flex; align-items: center; gap: 11px; margin: 0 0 14px; }
+  .sec .bar { width: 24px; height: 3.5px; background: var(--gold); border-radius: 2px; }
+  .sec h2 { font-size: 13.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--navy); font-weight: 700; }
+
+  .systems { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .sys { border: 1.5px solid var(--line); border-radius: 11px; overflow: hidden; }
+  .sys-head { background: var(--navy); color: #fff; padding: 12px 15px; display: flex; align-items: center; gap: 11px; }
+  .sys-head .n { width: 23px; height: 23px; border-radius: 50%; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .sys-head .t { font-size: 14px; font-weight: 700; line-height: 1.2; }
+  .sys-head .s { font-size: 10px; color: #AEBBDF; margin-top: 3px; }
+  .sys-body { padding: 13px 15px 15px; }
+  .cap { display: flex; gap: 11px; padding: 9.5px 0; border-bottom: 1px solid #EDF0F6; }
+  .cap:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cap svg { flex: 0 0 auto; margin-top: 1px; }
+  .cap .txt { font-size: 11px; line-height: 1.45; }
+  .cap .txt b { display: block; color: var(--navy); font-size: 11.8px; font-weight: 700; margin-bottom: 2px; }
+  .cap .txt span { color: var(--muted); }
+
+  .platform { margin-top: 16px; background: var(--ice); border-radius: 11px; padding: 14px 16px; }
+  .platform .hd { font-size: 10.5px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--teal); margin-bottom: 11px; }
+  .chips { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .chip { background: #fff; border: 1px solid #DCE3F0; border-radius: 7px; padding: 10px 6px; text-align: center; }
+  .chip svg { display: block; margin: 0 auto 6px; }
+  .chip span { font-size: 9.2px; line-height: 1.3; color: var(--navy); font-weight: 600; display: block; }
+
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 17px; }
+  .pr { border-radius: 11px; padding: 15px 16px; color: #fff; }
+  .pr:nth-child(1) { background: var(--navy); }
+  .pr:nth-child(2) { background: var(--teal); }
+  .pr:nth-child(3) { background: #8A6D0B; }
+  .pr .ic { margin-bottom: 9px; }
+  .pr b { display: block; font-size: 13px; margin-bottom: 5px; }
+  .pr span { font-size: 10.4px; line-height: 1.5; opacity: .94; }
+
+  .foot { margin-top: auto; display: flex; justify-content: space-between; font-size: 8.6px; color: #98A0AE; border-top: 1px solid var(--line); padding-top: 8px; }
+
+  .add { display: grid; grid-template-columns: 1fr 1fr; gap: 21px 20px; }
+  .row { display: flex; gap: 11px; align-items: flex-start; }
+  .row .dot { width: 27px; height: 27px; border-radius: 7px; background: var(--ice); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; margin-top: 1px; }
+  .row .c { font-size: 10.8px; line-height: 1.46; }
+  .row .c .ask { color: var(--muted); font-size: 9.2px; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; }
+  .row .c .give { color: var(--ink); display: block; margin-top: 2px; }
+  .row .c .give b { color: var(--navy); }
+
+  .tl { margin-top: 6px; }
+  .track { position: relative; height: 96px; }
+  .rail { position: absolute; left: 0; right: 0; top: 24px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #C9D6EC 0%, var(--teal) 42%, var(--navy) 78%, var(--navy) 100%); }
+  .ms { position: absolute; top: 0; transform: translateX(-50%); text-align: center; width: 150px; }
+  .ms .pin { width: 15px; height: 15px; border-radius: 50%; background: #fff; border: 3.5px solid var(--navy); margin: 20.5px auto 0; position: relative; z-index: 2; }
+  .ms.gold .pin { border-color: var(--gold); }
+  .ms .wk { font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px; }
+  .ms .lb { font-size: 9.6px; color: var(--muted); line-height: 1.35; margin-top: 3px; }
+  .ms.gold .wk { color: #8A6D0B; }
+
+  .needs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 11px; }
+  .need { border: 1.5px solid var(--line); border-top: 4px solid var(--teal); border-radius: 9px; padding: 12px 11px 13px; }
+  .need.hot { border-top-color: var(--gold); }
+  .need .num { font-size: 8.8px; font-weight: 700; color: var(--teal); letter-spacing: .9px; }
+  .need.hot .num { color: #8A6D0B; }
+  .need b { display: block; font-size: 11px; color: var(--navy); margin: 5px 0 4px; line-height: 1.28; }
+  .need span { font-size: 9.6px; color: var(--muted); line-height: 1.45; display: block; }
+
+  .qs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+  .q { background: var(--ice); border-radius: 9px; padding: 13px 13px 14px; }
+  .q .h { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+  .q .h b { font-size: 11.2px; color: var(--navy); }
+  .q p { font-size: 9.8px; line-height: 1.5; color: var(--muted); }
+  .q p em { font-style: normal; color: var(--navy); font-weight: 700; }
+
+  .closer { margin-top: 26px; background: var(--navy); border-radius: 11px; padding: 17px 19px; color: #fff; display: flex; align-items: center; gap: 16px; }
+  .closer .big { font-size: 13.4px; font-weight: 700; line-height: 1.4; }
+  .closer .sm { font-size: 10.2px; color: #AEBBDF; line-height: 1.5; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<section class="page">
+  <div class="mast">
+    <div>
+      <div class="kicker">In response to your brief</div>
+      <h1>Two systems, one platform.<br>Here is how we would build them.</h1>
+    </div>
+    <div class="right">Summary view<br>Full plan available on request</div>
+  </div>
+
+  <p class="lede">
+    Thanks for sending this through. Reading it, the first system is really about <b>trust</b> rather than search, and the second is about <b>control</b> rather than automation. Both sit on one shared foundation, so each works on its own without you ever maintaining two contact lists.
+  </p>
+
+  <div class="sec"><div class="bar"></div><h2>What we would build</h2></div>
+
+  <div class="systems">
+    <!-- SYSTEM 1 -->
+    <div class="sys">
+      <div class="sys-head">
+        <div class="n">1</div>
+        <div>
+          <div class="t">Executive Intelligence Assistant</div>
+          <div class="s">Answers only from your documents</div>
+        </div>
+      </div>
+      <div class="sys-body">
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
+          <div class="txt"><b>Finds the answer</b><span>Searches only what that person is allowed to open.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h7M9 17h5"/></svg>
+          <div class="txt"><b>Cites the page</b><span>Every sentence points to a document and page number.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>
+          <div class="txt"><b>Flags contradictions</b><span>Spots when two documents disagree on a figure, date or term.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 10l2.5 2.5L16 7"/><path d="M8 16h8"/></svg>
+          <div class="txt"><b>Tracks what is missing</b><span>Shows the evidence a decision still needs before it can be taken.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B23A48" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg>
+          <div class="txt"><b>Says when it does not know</b><span>Declines rather than guessing. This matters more than it sounds.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEM 2 -->
+    <div class="sys">
+      <div class="sys-head">
+        <div class="n">2</div>
+        <div>
+          <div class="t">CRM + Follow-up</div>
+          <div class="s">Nothing sent without a person</div>
+        </div>
+      </div>
+      <div class="sys-body">
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9" r="2.4"/><path d="M16 19c0-2.4 1.3-4 3.2-4"/></svg>
+          <div class="txt"><b>Three relationship types</b><span>Investors, partners and counterparties, customers and members.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><path d="M3 7h11l3 3-3 3H3z"/><path d="M3 17h9"/></svg>
+          <div class="txt"><b>Stages you configure</b><span>Including a GCC path: introduction, majlis, NDA, MoU, approval.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          <div class="txt"><b>Follow-ups that surface</b><span>Overdue and dormant relationships reach management, not the contact.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/><path d="M12 14v2"/></svg>
+          <div class="txt"><b>Approval gate on every message</b><span>Enforced in the database, not the screen. Drafter cannot self-approve.</span></div>
+        </div>
+        <div class="cap">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><path d="M4 20V11M10 20V5M16 20v-6M22 20H2"/></svg>
+          <div class="txt"><b>Reporting that reconciles</b><span>Who was contacted, what stage, what is overdue.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="platform">
+    <div class="hd">Built once, shared by both &mdash; and by anything you add later</div>
+    <div class="chips">
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7z"/></svg>
+        <span>Single sign-on<br>&amp; roles</span>
+      </div>
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="16" r="3"/><path d="M8 11v3a2 2 0 002 2h4"/></svg>
+        <span>One list of<br>people &amp; firms</span>
+      </div>
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><path d="M4 6h7l2 2h7v11H4z"/></svg>
+        <span>Document<br>store</span>
+      </div>
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M8 8V6M16 8V6M9 12.5h6"/></svg>
+        <span>Swappable<br>AI gateway</span>
+      </div>
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><path d="M5 12h4l2-5 3 10 2-5h3"/></svg>
+        <span>Workflow<br>&amp; reminders</span>
+      </div>
+      <div class="chip">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>
+        <span>Tamper-proof<br>audit trail</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="promises">
+    <div class="pr">
+      <div class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></div>
+      <b>It shows its work</b>
+      <span>Answers carry their sources, and a second pass deletes anything the sources do not support.</span>
+    </div>
+    <div class="pr">
+      <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div>
+      <b>A person always decides</b>
+      <span>There is no automated sending path anywhere in the code, not even one switched off.</span>
+    </div>
+    <div class="pr">
+      <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <b>Yours from day one</b>
+      <span>Your cloud account in a GCC region. You own the code, the accounts and the data.</span>
+    </div>
+  </div>
+
+  <div class="foot"><span>Confidential</span><span>Page 1 of 2</span></div>
+</section>
+
+<!-- ============================ PAGE 2 ============================ -->
+<section class="page">
+  <div class="sec"><div class="bar"></div><h2>Where we would go beyond the minimum</h2></div>
+  <div class="add">
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg></div>
+      <div class="c"><span class="ask">Retrieve information</span><span class="give">Permissions applied <b>inside</b> the search, so it never reads what the user may not open.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+      <div class="c"><span class="ask">Flag contradictions</span><span class="give">A <b>claims ledger</b>: every figure and date compared across the whole set, not just a search result.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/><circle cx="19" cy="18" r="2.5"/></svg></div>
+      <div class="c"><span class="ask">Track missing information</span><span class="give"><b>Decision checklists</b> you define once, plus documents referenced but never supplied.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></div>
+      <div class="c"><span class="ask">Answer in plain language</span><span class="give">A <b>grounding check</b> that deletes unsupported sentences. Arabic and English, including scans.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="16" r="3"/><path d="M9.5 10l5 4"/></svg></div>
+      <div class="c"><span class="ask">Contact records</span><span class="give">A counterparty in a contract is the <b>same record</b> as the relationship in your pipeline.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+      <div class="c"><span class="ask">Follow-ups</span><span class="give">Dormant relationships surfaced automatically, so nothing goes quiet unnoticed.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+      <div class="c"><span class="ask">Human approval</span><span class="give">A <b>four-eyes rule</b> in the database, risk flags at submission, full version history.</span></div>
+    </div>
+    <div class="row">
+      <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
+      <div class="c"><span class="ask">Basic reporting</span><span class="give">A <b>hash-chained audit trail</b>, exportable if internal audit or a regulator ever asks.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:34px"><div class="bar"></div><h2>How it would land</h2></div>
+  <div class="tl">
+    <div class="track">
+      <div class="rail"></div>
+      <div class="ms" style="left:8%"><div class="pin"></div><div class="wk">Week 6</div><div class="lb">Working structure of<br>both systems</div></div>
+      <div class="ms gold" style="left:35%"><div class="pin"></div><div class="wk">Week 8&ndash;9</div><div class="lb">Integrated demo: contradictions<br>and approvals working</div></div>
+      <div class="ms" style="left:63%"><div class="pin"></div><div class="wk">Week 9&ndash;15</div><div class="lb">Pilot on your real documents</div></div>
+      <div class="ms" style="left:90%"><div class="pin"></div><div class="wk">Week 20</div><div class="lb">Production go-live</div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:30px"><div class="bar"></div><h2>Your four questions, answered short</h2></div>
+  <div class="qs">
+    <div class="q">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M8 8V6M16 8V6"/></svg><b>Tools</b></div>
+      <p>One platform, two products, on standard parts. AI models sit behind a gateway, so <em>no vendor is load-bearing</em>.</p>
+    </div>
+    <div class="q">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M4 19h16"/></svg><b>Your data later</b></div>
+      <p>By configuration, not code. Import templates, connectors, and demo data that <em>clears in one action</em>.</p>
+    </div>
+    <div class="q">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><b>Timeline</b></div>
+      <p>Demo at <em>week 8&ndash;9</em>, production at week 20. A clickable version on sample documents at week 4 if it helps.</p>
+    </div>
+    <div class="q">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5h4a1.8 1.8 0 010 3.6h-3a1.8 1.8 0 000 3.6h4"/></svg><b>Cost</b></div>
+      <p>Fixed fee per milestone. Cloud and AI billed in your name at cost, <em>a few hundred a month</em> during the pilot.</p>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:32px"><div class="bar"></div><h2>What would help us most from you</h2></div>
+  <div class="needs">
+    <div class="need hot">
+      <div class="num">MOST USEFUL</div>
+      <b>Sample documents</b>
+      <span>50 to 200 under NDA. Ideally your worst scans, not your tidiest files.</span>
+    </div>
+    <div class="need hot">
+      <div class="num">SHAPES THE BUILD</div>
+      <b>Decisions you make often</b>
+      <span>Five to ten, and the evidence you expect for each.</span>
+    </div>
+    <div class="need hot">
+      <div class="num">CHANGES THE COST</div>
+      <b>Where data may live</b>
+      <span>Which countries, and whether text may be processed outside them.</span>
+    </div>
+    <div class="need">
+      <div class="num">USEFUL</div>
+      <b>Platform details</b>
+      <span>Cloud region, staff login, and the mailbox approved messages go from.</span>
+    </div>
+    <div class="need">
+      <div class="num">USEFUL</div>
+      <b>How you work today</b>
+      <span>Real pipeline stages, who approves outreach, any existing CRM.</span>
+    </div>
+  </div>
+
+  <div class="closer">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" style="flex:0 0 auto"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <div>
+      <div class="big">The full plan is ready whenever you are: architecture, timeline, and a cost model with every assumption visible.</div>
+      <div class="sm">An hour covers it comfortably, with no obligation attached. We are equally happy to answer anything here in writing first.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Confidential</span><span>Page 2 of 2</span></div>
+</section>
+
+</body>
+</html>
