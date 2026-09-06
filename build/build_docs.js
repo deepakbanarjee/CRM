@@ -10,6 +10,6 @@ const only = process.argv[2];
   const files = fs.readdirSync(DOCS).filter((f) => f.endsWith(".js") && (!only || f.includes(only))).sort();
   for (const f of files) {
     const mod = require(path.join(DOCS, f));
-    await buildDoc({ meta: mod.meta, body: mod.body, outFile: path.join(OUT, mod.outName), baseDir: OUT, toc: mod.toc !== false, landscape: !!mod.landscape });
+    await buildDoc({ meta: mod.meta, body: mod.body, outFile: path.join(OUT, mod.outName), baseDir: OUT, toc: mod.toc !== false, landscape: !!mod.landscape, cover: mod.cover !== false, compact: !!mod.compact });
   }
 })().catch((e) => { console.error(e); process.exit(1); });

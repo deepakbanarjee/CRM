@@ -19,6 +19,8 @@ const PAGE_W = 12240; // US Letter DXA
 const MARGIN = 1200;
 const CONTENT_W = PAGE_W - 2 * MARGIN; // 9840
 
+let COMPACT = false;
+
 function pngSize(file) {
   const b = fs.readFileSync(file);
   return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
@@ -42,7 +44,7 @@ function runs(text, base = {}) {
 }
 
 function para(text, opts = {}) {
-  return new Paragraph({ children: runs(text, opts.run || {}), spacing: { after: 120, line: 276 }, ...opts.p });
+  return new Paragraph({ children: runs(text, opts.run || {}), spacing: COMPACT ? { after: 66, line: 206 } : { after: 120, line: 276 }, ...opts.p });
 }
 
 function cell(text, { header = false, width, fill, align } = {}) {
@@ -50,11 +52,11 @@ function cell(text, { header = false, width, fill, align } = {}) {
     width: { size: width, type: WidthType.DXA },
     shading: fill ? { type: ShadingType.CLEAR, fill, color: "auto" } : undefined,
     verticalAlign: VerticalAlign.CENTER,
-    margins: { top: 70, bottom: 70, left: 100, right: 100 },
+    margins: COMPACT ? { top: 40, bottom: 40, left: 90, right: 90 } : { top: 70, bottom: 70, left: 100, right: 100 },
     children: text.split("\\n").map((line) => new Paragraph({
       alignment: align || AlignmentType.LEFT,
-      spacing: { after: 40, line: 252 },
-      children: runs(line, { size: 18, bold: header || undefined, color: header ? "FFFFFF" : undefined }),
+      spacing: COMPACT ? { after: 16, line: 200 } : { after: 40, line: 252 },
+      children: runs(line, { size: COMPACT ? 15 : 18, bold: header || undefined, color: header ? "FFFFFF" : undefined }),
     })),
   });
 }
@@ -122,7 +124,7 @@ function parse(body, baseDir) {
     if (t.startsWith("%widths")) { widths = t.replace("%widths", "").split(",").map(Number); i++; continue; }
     if (t === "---") { els.push(new Paragraph({ children: [new PageBreak()] })); i++; continue; }
     if (t.startsWith("# ")) { els.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(t.slice(2))], spacing: { before: 360, after: 160 } })); i++; continue; }
-    if (t.startsWith("## ")) { els.push(new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun(t.slice(3))], spacing: { before: 280, after: 120 } })); i++; continue; }
+    if (t.startsWith("## ")) { els.push(new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun(t.slice(3))], spacing: COMPACT ? { before: 110, after: 50 } : { before: 280, after: 120 } })); i++; continue; }
     if (t.startsWith("### ")) { els.push(new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun(t.slice(4))], spacing: { before: 200, after: 100 } })); i++; continue; }
     if (t.startsWith("> ")) {
       const buf = [t.slice(2)];
@@ -149,7 +151,7 @@ function parse(body, baseDir) {
         i++;
       }
       els.push(table(rows[0], rows.slice(1), widths));
-      els.push(new Paragraph({ spacing: { after: 80 } }));
+      els.push(new Paragraph({ spacing: { after: COMPACT ? 30 : 80 } }));
       widths = null;
       continue;
     }
@@ -157,7 +159,7 @@ function parse(body, baseDir) {
       while (i < lines.length && /^\s*[-*] /.test(lines[i])) {
         const raw = lines[i];
         const level = Math.min(2, Math.floor((raw.length - raw.trimStart().length) / 2));
-        els.push(new Paragraph({ numbering: { reference: "bullets", level }, spacing: { after: 60, line: 264 }, children: runs(raw.trim().slice(2)) }));
+        els.push(new Paragraph({ numbering: { reference: "bullets", level }, spacing: COMPACT ? { after: 24, line: 206 } : { after: 60, line: 264 }, children: runs(raw.trim().slice(2)) }));
         i++;
       }
       continue;
@@ -166,7 +168,7 @@ function parse(body, baseDir) {
       const ref = "num" + (els.length); // fresh numbering instance per list
       numberedRefs.push(ref);
       while (i < lines.length && /^\s*\d+\. /.test(lines[i])) {
-        els.push(new Paragraph({ numbering: { reference: ref, level: 0 }, spacing: { after: 60, line: 264 }, children: runs(lines[i].trim().replace(/^\d+\. /, "")) }));
+        els.push(new Paragraph({ numbering: { reference: ref, level: 0 }, spacing: COMPACT ? { after: 24, line: 206 } : { after: 60, line: 264 }, children: runs(lines[i].trim().replace(/^\d+\. /, "")) }));
         i++;
       }
       continue;
@@ -201,10 +203,32 @@ function coverPage(meta) {
   return els;
 }
 
-async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = false }) {
+function letterhead(meta) {
+  const els = [];
+  els.push(new Paragraph({ children: [new TextRun({ text: meta.series || "", size: 17, bold: true, color: TEAL, characterSpacing: 30 })], spacing: { after: 60 } }));
+  els.push(new Paragraph({ children: [new TextRun({ text: meta.title, size: 34, bold: true, color: NAVY })], spacing: { after: 40 } }));
+  if (meta.subtitle) els.push(new Paragraph({ children: [new TextRun({ text: meta.subtitle, size: 19, color: GREY })], spacing: { after: 140 } }));
+  const kv = [["To", meta.to], ["From", meta.from], ["Date", meta.date], ["Re", meta.re]].filter(([, v]) => v);
+  if (kv.length) {
+    const border = { style: BorderStyle.SINGLE, size: 4, color: "C9CFDD" };
+    els.push(new Table({
+      width: { size: CONTENT_W, type: WidthType.DXA }, columnWidths: [900, CONTENT_W - 900],
+      borders: { top: border, bottom: border, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE }, insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE } },
+      rows: kv.map(([k, v]) => new TableRow({ children: [
+        new TableCell({ width: { size: 900, type: WidthType.DXA }, margins: { top: 40, bottom: 40 }, children: [new Paragraph({ children: [new TextRun({ text: k, bold: true, size: 17, color: NAVY })] })] }),
+        new TableCell({ width: { size: CONTENT_W - 900, type: WidthType.DXA }, margins: { top: 40, bottom: 40 }, children: [new Paragraph({ children: [new TextRun({ text: v, size: 17, color: "333333" })] })] }),
+      ] })),
+    }));
+    els.push(new Paragraph({ spacing: { after: 100 } }));
+  }
+  return els;
+}
+
+async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = false, cover = true, compact = false }) {
   numberedRefs = [];
+  COMPACT = compact;
   const content = parse(body, baseDir);
-  const children = [...coverPage(meta)];
+  const children = cover ? [...coverPage(meta)] : [...letterhead(meta)];
   if (toc) {
     children.push(new Paragraph({ children: [new TextRun({ text: "Contents", size: 32, bold: true, color: NAVY })], spacing: { after: 200 } }));
     children.push(new TableOfContents("Contents", { hyperlink: true, headingStyleRange: "1-2" }));
@@ -217,10 +241,10 @@ async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = 
     title: meta.title,
     features: { updateFields: true },
     styles: {
-      default: { document: { run: { font: FONT, size: 21, color: "222222" } } },
+      default: { document: { run: { font: FONT, size: compact ? 17 : 21, color: "222222" }, paragraph: compact ? { spacing: { after: 60, line: 206 } } : undefined } },
       paragraphStyles: [
         { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 34, bold: true, color: NAVY, font: FONT }, paragraph: { outlineLevel: 0 } },
-        { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 26, bold: true, color: TEAL, font: FONT }, paragraph: { outlineLevel: 1 } },
+        { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: compact ? 20 : 26, bold: true, color: TEAL, font: FONT }, paragraph: { outlineLevel: 1, spacing: compact ? { before: 110, after: 50 } : undefined } },
         { id: "Heading3", name: "Heading 3", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 22, bold: true, color: NAVY, font: FONT }, paragraph: { outlineLevel: 2 } },
       ],
     },
@@ -235,8 +259,8 @@ async function buildDoc({ meta, body, outFile, baseDir, toc = true, landscape = 
       ],
     },
     sections: [{
-      properties: { page: { size: landscape ? { width: 15840, height: 12240, orientation: PageOrientation.LANDSCAPE } : { width: PAGE_W, height: 15840 }, margin: { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN } } },
-      headers: { default: new Header({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.shortTitle || meta.title, size: 16, color: GREY }), new TextRun({ text: "\t" + (meta.series || "Proposal package"), size: 16, color: GREY })] })] }) },
+      properties: { page: { size: landscape ? { width: 15840, height: 12240, orientation: PageOrientation.LANDSCAPE } : { width: PAGE_W, height: 15840 }, margin: compact ? { top: 600, bottom: 440, left: 880, right: 880 } : { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN } } },
+      headers: compact ? undefined : { default: new Header({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.shortTitle || meta.title, size: 16, color: GREY }), new TextRun({ text: "\t" + (meta.series || "Proposal package"), size: 16, color: GREY })] })] }) },
       footers: { default: new Footer({ children: [new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }], children: [new TextRun({ text: meta.classification || "Confidential", size: 16, color: GREY }), new TextRun({ text: "\tPage ", size: 16, color: GREY }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: GREY }), new TextRun({ text: " of ", size: 16, color: GREY }), new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: GREY })] })] }) },
       children,
     }],

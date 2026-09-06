@@ -1,11 +1,12 @@
 # Proposal Package: AI Executive Intelligence Assistant and CRM + Follow-up System
 
-First-meeting edition, September 2026. Fifteen documents plus diagrams. Every Word document is also provided as a PDF.
+First-meeting edition, September 2026. Sixteen documents plus diagrams. Every Word document is also provided as a PDF.
 
 ## Which documents go to the client, and when
 
 | Stage | Hand over |
 |---|---|
+| Before the meeting, in reply to their brief | 16 One-Page Reply |
 | First meeting (in the room) | 02 deck (presented); 01 Executive Summary (printed leave-behind) |
 | After NDA, before the detailed session | 01, 03, 04, 05, 06, 07, 08, 09, 13, 15 |
 | Detailed session and negotiation | 14 Draft Statement of Work; 05 workbook walked through together |
@@ -30,6 +31,7 @@ First-meeting edition, September 2026. Fifteen documents plus diagrams. Every Wo
 | 13 | `13_Gaps_Assumptions_and_Clarifying_Questions.docx` / `.pdf` | 20 gaps in the brief with assumptions and recommendations; 12 discovery questions; assumptions behind timeline and cost | Sponsor, product owner |
 | 14 | `14_Draft_Statement_of_Work.docx` / `.pdf` | Scope, milestones, commercial model, responsibilities, IP, data protection, warranties, change control, termination | Sponsor, procurement, legal |
 | 15 | `15_Requirements_Traceability_Matrix.xlsx` | Every requirement in the brief traced to design, component, phase, acceptance test and demo step | Client IT, delivery team |
+| 16 | `16_One_Page_Reply_to_Brief.docx` / `.pdf` | One-page written reply to the client's brief: our reading of the requirement, what we would add beyond the stated minimum, short answers to their four questions, and the information we need from them | Client sponsor, sent ahead of the meeting |
 | - | `diagrams/*.png` | Eight diagrams used across the documents and the deck | Reuse in any material |
 
 ## Reading order for the presenter
@@ -42,6 +44,7 @@ First-meeting edition, September 2026. Fifteen documents plus diagrams. Every Wo
 
 ## Before sending anything to the client
 
+- Fill the `[Client contact name]`, `[Your name, your company]` and `[Date]` placeholders in document 16 before sending it.
 - Replace `[Client legal entity]`, `[Supplier legal entity]` and the governing-law placeholder in document 14.
 - Set the blended rate and support tier on the `Rate_Card` sheet of document 05 so fees reflect your delivery model; the defaults are an average of an indicative rate card.
 - Re-verify the 2026 list prices and the GCC model-availability statements in documents 06 and 08; both change quickly.
