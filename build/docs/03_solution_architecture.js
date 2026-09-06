@@ -323,7 +323,7 @@ Large language models are probabilistic. The system is engineered so that errors
 
 ## 12.3 Safety controls specific to the CRM
 
-- No automated sending path exists in the code base; the send function requires an approval record signed by a different user than the drafter.
+- No automated path to external contacts exists in the code base; the send function requires an approval record signed by a different user than the drafter. Reminders and digests go to staff only.
 - Restricted-recipient rules (sanctioned or embargoed counterparties, regulators) block submission until a compliance role approves.
 - Consent status is displayed on every contact; outreach to contacts without recorded consent raises a flag.
 - Full message history is immutable; edits create versions.

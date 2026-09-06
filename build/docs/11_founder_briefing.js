@@ -57,7 +57,7 @@ Meaning-based search is weak on exact numbers, names and codes; keyword search i
 
 ## 3.6 Citations and the grounding check
 
-Every sentence of an answer must point to a document and page. After the answer is drafted, a second, separate pass checks each sentence against its cited passage and removes anything unsupported. This is the single most important trust feature. In the meeting, say: "It shows its work, and a second check marks its homework."
+Every factual statement in an answer must point to a document and page. After the answer is drafted, a second, separate pass checks each sentence against its cited passage and removes anything unsupported. This is the single most important trust feature. In the meeting, say: "It shows its work, and a second check marks its homework."
 
 ## 3.7 Claims ledger (how contradictions are found)
 

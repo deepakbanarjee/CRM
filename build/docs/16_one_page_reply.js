@@ -16,9 +16,9 @@ Thanks for sending this through. It is a clearer brief than most, and the two sy
 
 ## How we are reading it
 
-The interesting thing about the first system is that answering questions is not really the hard part. Plenty of tools can search a folder. The hard part is being trustworthy enough that your management will act on what it says. So we would build it as a **closed-domain** system: it answers only from documents you have loaded, cites the document and page for every statement, and when the answer genuinely is not there, says so instead of guessing. That last behaviour matters more than it sounds.
+The interesting thing about the first system is that answering questions is not really the hard part. Plenty of tools can search a folder. The hard part is being trustworthy enough that your management will act on what it says. So we would build it as a **closed-domain** system: it answers only from documents you have loaded, cites the document and page for every answer, and when the answer genuinely is not there, says so instead of guessing. That last behaviour matters more than it sounds.
 
-The second system is the opposite shape. Its records and pipelines are conventional, deliberately so. What makes it unusual is your requirement that nothing goes out without a person approving it, which we have treated as a design constraint rather than a feature: there is no automated sending path anywhere in the code, not even one switched off.
+The second system is the opposite shape. Its records and pipelines are conventional, deliberately so. What makes it unusual is your requirement that nothing goes out without a person approving it, which we have treated as a design constraint rather than a feature: nothing reaches a contact without a named person approving it, and reminders go only to your own staff.
 
 We would put both on **one shared platform** so each is usable alone but they share a single login, one list of organisations and people, one document store and one audit trail. The investor named in a contract is then the same record as the investor in your pipeline, and you never maintain two contact lists. Everything runs in your own cloud account in a GCC region, with a gateway that can route sensitive documents to a model inside the country, so residency stays a setting you control. You own the code, the accounts and the data throughout.
 
@@ -30,7 +30,7 @@ Your brief describes the minimum well. Here is where we would go a little furthe
 | What you asked for | What we would add to it |
 |---|---|
 | Retrieve information; controlled access | Permissions applied **inside** the search rather than after it, so the system never even reads a passage the user may not open. Every answer cites its document and page. |
-| Flag contradictions | A structured **claims ledger**. Every figure, date and term is extracted into a comparable record alongside the sentence it came from, so conflicts surface across your whole document set, not just whatever a search returned. Superseded drafts are recognised, so an old version is not flagged against the final. |
+| Flag contradictions | A structured **claims ledger**. Figures, dates and terms are extracted into comparable records alongside the sentence it came from, so conflicts surface across your whole document set, not just whatever a search returned. Superseded drafts are recognised, so an old version is not flagged against the final. |
 | Track missing information | Configurable **decision checklists**. You define once what evidence each decision needs; the system reports what is present, missing or contradicted, and spots documents referenced but never supplied. |
 | Answer in plain language | An independent **grounding check** reads the drafted answer back against its sources and deletes any sentence they do not support. If nothing survives, it declines. Arabic and English throughout, including scans. |
 | Contact and relationship records | A shared entity registry, so anything found in the documents can surface on the matching relationship. Pipelines and stages are configurable per category, including a GCC-specific path. |
@@ -42,8 +42,8 @@ Your brief describes the minimum well. Here is where we would go a little furthe
 
 - **Build approach and tools.** One platform, two products, on standard components, with AI models reached through a gateway so no single vendor is load-bearing and you can change your mind later without a rewrite.
 - **Plugging in real data later.** By configuration rather than code: custom fields, configurable stages and checklists, import templates with a validation preview, and connectors for SharePoint, Drive and mailboxes. Demo data is flagged separately so it clears in a single action once real data arrives.
-- **Timeline.** A working structure of both systems at around week 6, and an integrated demo, including contradiction detection and the approval queue, at week 8 to 9. A pilot on your real documents from week 9, and production at around week 20. If it helps to see something sooner, we can show a clickable version on sample documents at week 4.
-- **Cost.** A fixed fee for a short discovery, then milestone-based fixed fees through demo, pilot and production, followed by an annual managed service. Cloud and AI usage is contracted in your name and passed through at cost. During the pilot that comes to a few hundred dollars a month, which tends to surprise people.
+- **Timeline.** A working structure of both systems at around week 6, and an integrated demo, including contradiction detection and the approval queue, at week 8 to 9. A pilot on your real documents from week 9, and production at around week 20, assuming sample documents and system access arrive in the first two weeks. If it helps to see something sooner, we can show a clickable version on sample documents at week 4.
+- **Cost.** A fixed fee for a short discovery, then milestone-based fixed fees through demo, pilot and production, followed by an annual managed service. Cloud and AI usage is contracted in your name and passed through at cost. During the pilot that running cost comes to a few hundred dollars a month, separate from the build fees, which tends to surprise people.
 
 ## What would help us most from you
 

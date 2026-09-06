@@ -100,7 +100,7 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 ## C6. "Can the AI send emails by itself?"
 
-**Short answer:** No, by design. There is no automated sending path in the code. A message is sent only when a named approver, who is not the drafter, approves it; the send happens under that person's authority through your own mailbox, and it is logged. Reminders go to your staff, never to contacts.
+**Short answer:** No, by design. There is no automated path to an external contact anywhere in the code; the only automated messages are reminders to your own staff. A message is sent only when a named approver, who is not the drafter, approves it; the send happens under that person's authority through your own mailbox, and it is logged. Reminders go to your staff, never to contacts.
 
 ## C7. "Will you train models on our data?"
 

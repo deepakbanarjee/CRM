@@ -106,7 +106,7 @@ function img(s, file, x, y, w, h) {
   reqs.forEach(([h, b], i) => card(s, 0.5 + i * 2.3, 1.5, 2.15, 2.0, h, b, i === 2 ? "FBF3DC" : (i % 2 ? ICE : LIGHT), i === 2 ? "8A6D0B" : NAVY));
   s.addText("Cross-cutting asks", { x: 0.5, y: 3.7, w: 4, h: 0.3, fontSize: 13, bold: true, color: TEAL, fontFace: FONT_B, isTextBox: true, margin: 0 });
   s.addText(bullets(["Proposed build approach and tools for each system (same platform or different)", "A structure that accepts real data later without a rebuild", "Timeline to a working structure and demo", "Cost or pricing model"], 12), { x: 0.5, y: 4.0, w: 9, h: 1.1, isTextBox: true, margin: 0, valign: "top" });
-  s.addNotes("Emphasise that we took the human-approval requirement as a hard design constraint, not a feature toggle: there is no automated sending path in the system. Confirm the three categories and ask what is specific about their GCC pipeline (intermediaries, majlis meetings, regulatory steps), which we will configure rather than hard-code.");
+  s.addNotes("Emphasise that we took the human-approval requirement as a hard design constraint, not a feature toggle: there is no automated path to an external contact in the system; reminders go to staff only. Confirm the three categories and ask what is specific about their GCC pipeline (intermediaries, majlis meetings, regulatory steps), which we will configure rather than hard-code.");
 }
 
 // ---------------------------------------------------------------- 5 Our answer
@@ -177,7 +177,7 @@ function img(s, file, x, y, w, h) {
 // ---------------------------------------------------------------- 10 Approval gate
 {
   const s = base();
-  title(s, "Nothing leaves without a human's name on it", "The approval gate is enforced in the database, not just the screen: drafter cannot approve, and there is no scheduled-send path in the code");
+  title(s, "Nothing leaves without a human's name on it", "The approval gate is enforced in the database, not just the screen: drafter cannot approve, and there is no scheduled send to contacts anywhere in the code");
   img(s, "04_crm_approval_flow.png", 0.5, 1.3, 9, 3.8);
   s.addNotes("Walk left to right: trigger, draft (human or AI-assisted from the relationship history), review queue with risk flags, decision by a named approver who is not the drafter, send through the client's own mailbox under the approver's authority, and record. The red box is the guarantee: no auto-send, no AI sending on its own, no bulk blasts without per-message approval. If asked whether staff can bypass it: not through the system; sending requires an approval record from a different user, enforced in the database.");
 }

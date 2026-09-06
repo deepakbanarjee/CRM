@@ -66,7 +66,7 @@
   .row .c .give b { color: var(--navy); }
 
   .tl { margin-top: 6px; }
-  .track { position: relative; height: 96px; }
+  .track { position: relative; height: 92px; }
   .rail { position: absolute; left: 0; right: 0; top: 24px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #C9D6EC 0%, var(--teal) 42%, var(--navy) 78%, var(--navy) 100%); }
   .ms { position: absolute; top: 0; transform: translateX(-50%); text-align: center; width: 150px; }
   .ms .pin { width: 15px; height: 15px; border-radius: 50%; background: #fff; border: 3.5px solid var(--navy); margin: 20.5px auto 0; position: relative; z-index: 2; }
@@ -74,6 +74,7 @@
   .ms .wk { font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px; }
   .ms .lb { font-size: 9.6px; color: var(--muted); line-height: 1.35; margin-top: 3px; }
   .ms.gold .wk { color: #8A6D0B; }
+  .tlnote { font-size: 9px; color: var(--muted); margin-top: 2px; font-style: italic; }
 
   .needs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 11px; }
   .need { border: 1.5px solid var(--line); border-top: 4px solid var(--teal); border-radius: 9px; padding: 12px 11px 13px; }
@@ -130,7 +131,7 @@
         </div>
         <div class="cap">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h7M9 17h5"/></svg>
-          <div class="txt"><b>Cites the page</b><span>Every sentence points to a document and page number.</span></div>
+          <div class="txt"><b>Cites the page</b><span>Every answer points to its document and page number.</span></div>
         </div>
         <div class="cap">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>
@@ -206,7 +207,7 @@
       </div>
       <div class="chip">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>
-        <span>Tamper-proof<br>audit trail</span>
+        <span>Tamper-evident<br>audit trail</span>
       </div>
     </div>
   </div>
@@ -220,7 +221,7 @@
     <div class="pr">
       <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div>
       <b>A person always decides</b>
-      <span>There is no automated sending path anywhere in the code, not even one switched off.</span>
+      <span>Nothing reaches a contact without a named person approving it. Reminders go to your own staff only.</span>
     </div>
     <div class="pr">
       <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -242,7 +243,7 @@
     </div>
     <div class="row">
       <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
-      <div class="c"><span class="ask">Flag contradictions</span><span class="give">A <b>claims ledger</b>: every figure and date compared across the whole set, not just a search result.</span></div>
+      <div class="c"><span class="ask">Flag contradictions</span><span class="give">A <b>claims ledger</b>: figures, dates and terms compared across the whole set, not just a search result.</span></div>
     </div>
     <div class="row">
       <div class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C7293" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h9"/><circle cx="19" cy="18" r="2.5"/></svg></div>
@@ -279,6 +280,7 @@
       <div class="ms" style="left:63%"><div class="pin"></div><div class="wk">Week 9&ndash;15</div><div class="lb">Pilot on your real documents</div></div>
       <div class="ms" style="left:90%"><div class="pin"></div><div class="wk">Week 20</div><div class="lb">Production go-live</div></div>
     </div>
+    <div class="tlnote">Assumes sample documents and system access in the first two weeks. The full plan lists each dependency and the acceptance criteria at every milestone.</div>
   </div>
 
   <div class="sec" style="margin-top:30px"><div class="bar"></div><h2>Your four questions, answered short</h2></div>
@@ -297,7 +299,7 @@
     </div>
     <div class="q">
       <div class="h"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2761" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5h4a1.8 1.8 0 010 3.6h-3a1.8 1.8 0 000 3.6h4"/></svg><b>Cost</b></div>
-      <p>Fixed fee per milestone. Cloud and AI billed in your name at cost, <em>a few hundred a month</em> during the pilot.</p>
+      <p>Build is a fixed fee per milestone. Running cost is billed in your name at cost: <em>a few hundred dollars a month</em> during the pilot.</p>
     </div>
   </div>
 
