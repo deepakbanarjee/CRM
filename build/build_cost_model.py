@@ -88,7 +88,7 @@ vol = [
     ("Documents in corpus (cumulative)", 2000, 25000, 250000, 1500000, "docs", "Indicative; pilot limit 5,000 in SOW"),
     ("Average pages per document", 20, 20, 20, 20, "pages", "Contracts and reports; spreadsheets counted by sheet"),
     ("Tokens per page", 600, 600, 600, 600, "tokens", "Roughly 450 words per page"),
-    ("Share of pages that are scans needing OCR", 0.3, 0.3, 0.3, 0.3, "%", "GCC corpora often have many scanned Arabic pages"),
+    ("Share of pages that are scans needing OCR", 0.3, 0.3, 0.3, 0.3, "%", "Assumption pending sight of the corpus; older contracts and board papers are often scanned. Confirm at discovery"),
     ("New documents per month (share of corpus)", 0.05, 0.05, 0.05, 0.05, "%", "Ongoing ingestion after initial load"),
     ("Questions per user per working day", 5, 5, 4, 3, "questions", "Executives ask fewer, analysts more"),
     ("Working days per month", 22, 22, 22, 22, "days", ""),
@@ -121,16 +121,16 @@ prices = [
     ("Claude Sonnet 5 output", 10, "USD / M tokens", "Anthropic pricing, 2026"),
     ("Voyage voyage-3.5 embeddings", 0.02, "USD / M tokens", "Voyage AI pricing page, 2026; first 200M tokens free"),
     ("Voyage rerank-2.5", 0.05, "USD / M tokens", "Voyage AI pricing page, 2026; verify current rate"),
-    ("OCR (Azure AI Document Intelligence, read/layout)", 1.5, "USD / 1,000 pages", "Azure pricing, UAE North; verify current rate"),
+    ("OCR (Azure AI Document Intelligence, read/layout)", 1.5, "USD / 1,000 pages", "Azure pricing, Malaysia West / Southeast Asia; verify current rate"),
     ("Supabase Pro (pilot database, storage, auth)", 25, "USD / month", "supabase.com/pricing, 2026, plus usage"),
     ("Vercel Pro (pilot web hosting)", 20, "USD / seat / month", "vercel.com/pricing, 2026"),
-    ("Managed PostgreSQL in GCC region, tier 1", 400, "USD / month", "AWS RDS / Azure Database, mid-size instance with storage; estimate"),
-    ("Managed PostgreSQL in GCC region, tier 2 (HA)", 2500, "USD / month", "Multi-AZ, larger instance, PITR; estimate"),
-    ("Managed PostgreSQL in GCC region, tier 3 (HA, read replicas)", 9000, "USD / month", "Estimate"),
+    ("Managed PostgreSQL in region, tier 1", 400, "USD / month", "AWS RDS / Azure Database, mid-size instance with storage; estimate"),
+    ("Managed PostgreSQL in region, tier 2 (HA)", 2500, "USD / month", "Multi-AZ, larger instance, PITR; estimate"),
+    ("Managed PostgreSQL in region, tier 3 (HA, read replicas)", 9000, "USD / month", "Estimate"),
     ("Containers, load balancer, storage, networking, tier 1", 600, "USD / month", "ECS/Fargate or Container Apps; estimate"),
     ("Containers, load balancer, storage, networking, tier 2", 4000, "USD / month", "Kubernetes or managed containers, HA; estimate"),
     ("Containers, load balancer, storage, networking, tier 3", 18000, "USD / month", "Multi-tenant, DR region; estimate"),
-    ("GPU node (H100-class 80GB) in-region, on-demand", 4.5, "USD / hour", "Hyperscaler GCC region on-demand; reserved pricing 30-50% lower; verify"),
+    ("GPU node (H100-class 80GB) in-region, on-demand", 4.5, "USD / hour", "Hyperscaler Southeast Asia region on-demand; reserved pricing 30-50% lower; verify"),
     ("Hours per month", 730, "hours", ""),
     ("Observability, security tooling, backups, tier 1", 300, "USD / month", "Langfuse cloud or self-host, Sentry, WAF; estimate"),
     ("Observability, security tooling, backups, tier 2", 2000, "USD / month", "Plus SIEM export, KMS, pen-test amortised; estimate"),
@@ -164,7 +164,7 @@ roles = [
     ("Full-stack engineer (TypeScript)", 4000, "Web app, Core API, CRM workflow"),
     ("QA and evaluation analyst", 2500, "Golden set, tests, acceptance"),
     ("Project manager", 3000, "Plan, risks, client reporting"),
-    ("UX designer", 3000, "Interface, Arabic layout"),
+    ("UX designer", 3000, "Interface, multilingual layout"),
     ("Security and DevOps specialist", 4500, "IaC, hardening, pen-test coordination"),
 ]
 for i, (role, wk, g) in enumerate(roles, start=5):
@@ -175,7 +175,7 @@ r = 5 + len(roles) + 1
 put(ws, f"A{r}", "Blended weekly rate used for fees (set this)", bold=True)
 put(ws, f"B{r}", f"=AVERAGE(B5:B{4 + len(roles)})", BLACK, USD, YELLOW, comment="Default is the simple average of the rate card. Override with an agreed blended rate (type a number over the formula) if the client prefers a single rate.")
 BLENDED = f"Rate_Card!$B${r}"
-put(ws, f"E{r}", "Indicative market ranges per person-week (2026): South Asia 1,000-2,000; Eastern Europe 2,500-4,500; GCC-based / UK / US 5,000-9,000. Set rates to match your delivery model.", wrap=True)
+put(ws, f"E{r}", "Indicative market ranges per person-week (2026): South Asia 1,000-2,000; Southeast Asia 1,500-3,000; Eastern Europe 2,500-4,500; GCC / UK / US 5,000-9,000. Set rates to match your delivery model.", wrap=True)
 ws.row_dimensions[r].height = 45
 put(ws, f"A{r + 1}", "Managed service: support tier as share of annual platform fee", bold=True)
 put(ws, f"B{r + 1}", 0.2, BLUE, PCT, YELLOW, comment="Standard 15%, Business 20%, Enterprise 30% of the annual platform fee.")
@@ -214,7 +214,7 @@ add("Monthly: re-ranking", [f"={c}6*40*500/1000000*{P('Voyage rerank-2.5')}" for
 add("Monthly: CRM AI-assisted drafts (Sonnet 5)", [f"={V('Outreach messages per month (CRM)', c)}*{V('Share of AI-assisted drafts', c)}*{V('Tokens per AI-assisted draft (in + out)', c)}/1000000*({P('Claude Sonnet 5 input')}*0.6+{P('Claude Sonnet 5 output')}*0.4)*{api_share(c)}" for c in cols], USD, "messages x AI share x tokens x blended price")
 add("Monthly: WhatsApp conversations", [f"={V('Outreach messages per month (CRM)', c)}*{P('Share of outreach via WhatsApp')}*{P('WhatsApp Business conversation (utility)')}" for c in cols], USD, "messages x WhatsApp share x per-conversation price")
 add("Monthly: AI and messaging subtotal", [f"=SUM({c}11:{c}16)" for c in cols], USD, "", True)
-add("Monthly: database and storage", [f"={P('Supabase Pro (pilot database, storage, auth)')}", f"={P('Managed PostgreSQL in GCC region, tier 1')}", f"={P('Managed PostgreSQL in GCC region, tier 2 (HA)')}", f"={P('Managed PostgreSQL in GCC region, tier 3 (HA, read replicas)')}"], USD, "Supabase Pro at pilot; managed PostgreSQL in region above")
+add("Monthly: database and storage", [f"={P('Supabase Pro (pilot database, storage, auth)')}", f"={P('Managed PostgreSQL in region, tier 1')}", f"={P('Managed PostgreSQL in region, tier 2 (HA)')}", f"={P('Managed PostgreSQL in region, tier 3 (HA, read replicas)')}"], USD, "Supabase Pro at pilot; managed PostgreSQL in region above")
 add("Monthly: application hosting", [f"={P('Vercel Pro (pilot web hosting)')}*2+60", f"={P('Containers, load balancer, storage, networking, tier 1')}", f"={P('Containers, load balancer, storage, networking, tier 2')}", f"={P('Containers, load balancer, storage, networking, tier 3')}"], USD, "Vercel Pro (2 seats) + small container at pilot; containers in region above")
 add("Monthly: in-region GPU nodes (patterns B/C)", [f"={V('GPU nodes for in-region models (0 if pattern A)', c)}*{P('GPU node (H100-class 80GB) in-region, on-demand')}*{P('Hours per month')}" for c in cols], USD, "nodes x hourly price x hours; reserved pricing can cut this 30-50%")
 add("Monthly: observability, security tooling, backups", ["=40", f"={P('Observability, security tooling, backups, tier 1')}", f"={P('Observability, security tooling, backups, tier 2')}", f"={P('Observability, security tooling, backups, tier 3')}"], USD, "Sentry/Langfuse free tiers at pilot")

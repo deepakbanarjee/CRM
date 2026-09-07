@@ -3,7 +3,7 @@ module.exports = {
   meta: {
     series: "PROPOSAL PACKAGE  |  DOCUMENT 08",
     title: "Security, Privacy and Governance",
-    subtitle: "Access control, audit, data residency, GCC data protection compliance, AI governance and the human-in-the-loop guarantee",
+    subtitle: "Access control, audit, data residency, Malaysian and Philippine data protection compliance, AI governance and the human-in-the-loop guarantee",
     shortTitle: "Security, Privacy and Governance",
     docNo: "08 of 15",
     audience: "Client CISO, legal and compliance, IT; delivery team",
@@ -11,7 +11,7 @@ module.exports = {
   body: `
 # 1. Summary
 
-> The platform is designed so that **the client owns everything** (accounts, code, data), **every action is attributable** (who saw what, who approved what), **data location is a policy choice** (managed cloud in a GCC region through fully sovereign hosting), and **no AI action reaches the outside world without a human** (outreach approval gate).
+> The platform is designed so that **the client owns everything** (accounts, code, data), **every action is attributable** (who saw what, who approved what), **data location is a policy choice** (managed cloud in Malaysia or Singapore through fully sovereign hosting), and **no AI action reaches the outside world without a human** (outreach approval gate).
 
 This document is not legal advice. It sets out the controls we will build and the regulatory landscape as we understand it in 2026, so that the client's legal and compliance teams can confirm the approach for their jurisdictions.
 
@@ -57,9 +57,10 @@ This document is not legal advice. It sets out the controls we will build and th
 
 "Where does our data go?" The honest answer has two parts: **data at rest** (documents, database, backups) and **data in processing** (what the AI model sees while answering).
 
-- Data at rest can be kept in a GCC cloud region from day one (AWS UAE me-central-1, AWS Bahrain me-south-1, Azure UAE North, Google Cloud Dammam) or on premises.
-- Data in processing depends on the model route. As of early 2026, Claude models are reachable from the AWS Middle East regions through Amazon Bedrock's **global cross-region inference**, which may process the request outside the region in transit, encrypted, without storage, under AWS enterprise terms. Microsoft Foundry's Claude deployments are "Global Standard". Google Cloud's Claude endpoints are US and EU multi-region. Frontier models with an in-country endpoint in the GCC were not confirmed at the time of writing; this should be re-checked at discovery because availability changes quickly.
-- For processing that must stay in country, the platform routes to open-weight models hosted on in-region GPUs (Pattern C), at a cost and quality trade-off documented in Document 03 and Document 05.
+- **Data at rest** can be kept in Malaysia from day one. AWS opened its Asia Pacific (Malaysia) region, ap-southeast-5, in August 2024, and Microsoft made **Azure Malaysia West** generally available in May 2025, both with three availability zones; a second Malaysian Azure region has been announced. So "our data stays in Malaysia" is a commitment that can actually be met.
+- **For the Philippine entity the honest answer is different.** None of the major providers operates a full cloud region in the Philippines. AWS runs a **Local Zone in Manila**, which is a latency extension of the Singapore region rather than a region in its own right, and Azure and Google Cloud both serve the Philippines from **Singapore**. Philippine data therefore sits in Singapore or in Malaysia unless the client hosts it themselves. We would rather say this now than discover it during a compliance review.
+- **Data in processing** depends on the model route. As of early 2026, Claude models are reached through Amazon Bedrock using **cross-region inference**, which may process a request outside the country it was sent from, in transit, encrypted, without storage, under AWS enterprise terms. Microsoft Foundry's Claude deployments are "Global Standard". Google Cloud's Claude endpoints are US and EU multi-region. A frontier model with an endpoint pinned inside Malaysia or the Philippines was not confirmed at the time of writing, and this should be re-checked at discovery because availability changes quickly.
+- For processing that must stay in a named country, the platform routes to open-weight models hosted on GPUs in that country (Pattern C), at a cost and quality trade-off documented in Document 03 and Document 05.
 
 ## 3.2 Deployment patterns
 
@@ -67,22 +68,24 @@ This document is not legal advice. It sets out the controls we will build and th
 
 ## 3.3 Recommended approach
 
-Classify documents at ingestion (public, internal, confidential, restricted) and personal-data status. Route by policy: restricted and personal-data documents to in-region processing; everything else to the frontier model. This delivers most of the quality at most of the compliance, and is a configuration setting in the model gateway.
+Classify documents at ingestion (public, internal, confidential, restricted), record the personal-data status, and record **which entity and country the record belongs to**. Route by policy: restricted and personal-data documents to in-region processing; everything else to the frontier model. This delivers most of the quality at most of the compliance, and is a configuration setting in the model gateway.
 
-# 4. GCC data protection landscape (2026)
+Our suggested starting point, to be confirmed with the client's legal contact: store everything in **Azure Malaysia West or AWS ap-southeast-5**, treat the Singapore fallback as the documented alternative for Philippine workloads that need it, and record a transfer assessment for the Philippines-to-Malaysia flow. Because residency is a routing policy rather than an architectural choice, adding a **GCC region later, when the GCC entity begins trading, is a configuration change and not a rebuild**.
+
+# 4. Data protection landscape (2026)
+
+The client's operations are in **Malaysia** and the **Philippines**, with a **GCC** entity being established. The two operating jurisdictions drive the design today; the GCC is a forward-looking consideration and is included so that entering that market does not require rework.
 
 %widths 18,42,40
 | Jurisdiction | Primary law and regulator | Points relevant to this project |
 |---|---|---|
-| Saudi Arabia | Personal Data Protection Law (PDPL), in force September 2023, enforcement from September 2024; Saudi Data and AI Authority (SDAIA). Regulation on Personal Data Transfer Outside the Kingdom; SDAIA Risk Assessment Guideline for cross-border transfers (February 2025). | Cross-border transfer of personal data requires a lawful mechanism (adequacy, standard contractual clauses or binding corporate rules, or exceptions) and a documented risk assessment for large-scale or sensitive transfers. Data of Saudi residents in the CRM should be stored in Kingdom or transferred under an approved mechanism. Active enforcement decisions have been issued. |
-| UAE (onshore) | Federal Decree-Law No. 45 of 2021 on Personal Data Protection, in force 2 January 2022; UAE Data Office. | GDPR-like duties: lawful basis, purpose limitation, data subject rights, breach notification, DPO for high-risk processing. Cross-border transfer permitted to adequate jurisdictions or with safeguards. |
-| UAE free zones | DIFC Data Protection Law No. 5 of 2020 (DIFC Commissioner of Data Protection); ADGM Data Protection Regulations 2021 (ADGM Office of Data Protection). | Separate regimes for entities established in the zones; closely modelled on GDPR; require records of processing and, for DIFC, notification of automated decision tools in some cases. |
-| Qatar | Law No. 13 of 2016 on Personal Data Privacy Protection; guidelines 2021; Compliance and Data Protection Department (MCIT). QFC has its own regulations. | Consent and purpose rules; sensitive data requires prior permission. |
-| Bahrain | Personal Data Protection Law No. 30 of 2018 with implementing ministerial resolutions; Personal Data Protection Authority. | Transfers permitted to listed adequate countries or with authority approval; data protection guardian requirement in some cases. |
-| Oman | Personal Data Protection Law (Royal Decree 6/2022), full effect February 2026 after grace period. | Consent-centric; sensitive data permits; notification duties. |
-| Kuwait | No comprehensive statute; sector rules (telecoms data privacy regulation, e-transactions law). | Contractual and confidentiality obligations govern. |
+| Malaysia | Personal Data Protection Act 2010 as amended by the Personal Data Protection (Amendment) Act 2024, with the principal amendments in force from 1 June 2025; Personal Data Protection Commissioner (JPDP). Cross Border Personal Data Transfer Guidelines issued 29 April 2025. | Four changes matter here. A **Data Protection Officer must be appointed** by organisations processing personal data at scale or carrying out regular and systematic monitoring, and the duty now reaches **processors as well as controllers**. A personal data breach must be **notified to the Commissioner within 72 hours of the breach occurring** (not 72 hours from when you conclude it is serious), and affected individuals within 7 days of that notification. The old approved-country whitelist has been replaced by a **risk-based adequacy test**, with a transfer impact assessment expected to evidence it. The penalty ceiling is now **RM1,000,000 per offence**, with imprisonment available for responsible officers. |
+| Philippines | Data Privacy Act of 2012 (Republic Act 10173) and its implementing rules; National Privacy Commission (NPC). NPC Advisory No. 2024-01 on model contractual clauses, issued 30 May 2024. | Registration of data processing systems and appointment of a Data Protection Officer; security incident notification to the NPC and affected data subjects within 72 hours of knowledge of a qualifying breach. Cross-border transfer is permitted where the transferring organisation remains accountable and the data receives a **comparable level of protection**. The NPC's model contractual clauses are **voluntary and encouraged rather than mandatory**, and the NPC does not review agreements for conformity, so the accountability sits with the client. A Privacy Impact Assessment is the expected evidence for a new system of this kind. |
+| GCC (future) | Applies only once the GCC entity begins to process personal data there. Saudi PDPL (SDAIA), UAE Federal Decree-Law No. 45 of 2021, and the separate DIFC and ADGM regimes are the ones most likely to be relevant. | Not in scope for the first release on our current understanding. The point to note is structural: each of these regimes restricts cross-border transfer in some form, so the per-record jurisdiction field and the policy-based routing described in section 3 are what make entry into that market a configuration exercise. We would confirm the position with local counsel before the entity starts trading. |
 
-Because the client's relationships span the GCC, the CRM stores each person's jurisdiction, consent status and source, so that outreach and transfer rules can be applied per record.
+!! This document is our reading of the position, not legal advice, and the client's own counsel should confirm it. Two points are worth raising early because they change the design rather than the paperwork: whether Philippine personal data may sit in Singapore or Malaysia, and whether a single DPO can cover both operating entities.
+
+Because the client's relationships span more than one jurisdiction, and will span another when the GCC entity opens, the CRM stores each person's **country, jurisdiction, consent status and source** on the record itself, so that outreach and transfer rules can be applied per record rather than per system.
 
 # 5. Privacy by design in the CRM
 
@@ -101,9 +104,9 @@ Because the client's relationships span the GCC, the CRM stores each person's ju
 | Human accountability | Findings have owners and resolution notes; outreach has drafter and approver; nothing is sent automatically |
 | Model change control | Model versions pinned; changes tested against the golden set before release; results recorded |
 | No training on client data | Providers used under enterprise terms; opt-outs and zero- or limited-retention options selected where offered; self-hosting removes third parties entirely |
-| Bias and language fairness | Evaluation set includes Arabic and English questions and documents; performance reported per language |
+| Bias and language fairness | The evaluation set covers every language actually present in the client's corpus, and accuracy is reported separately per language rather than as a single blended figure |
 | Spend and abuse controls | Per-user and per-team budgets, rate limits and anomaly alerts on the gateway |
-| Alignment with frameworks | Controls map to ISO/IEC 42001 (AI management) and the NIST AI Risk Management Framework; SDAIA's AI ethics principles are referenced for Saudi deployments |
+| Alignment with frameworks | Controls map to ISO/IEC 42001 (AI management) and the NIST AI Risk Management Framework; Malaysia's National Guidelines on AI Governance and Ethics are referenced for the Malaysian entity |
 
 # 7. Compliance roadmap by tier
 
@@ -112,7 +115,7 @@ Because the client's relationships span the GCC, the CRM stores each person's ju
 |---|---|
 | Pilot | Security controls above; provider certifications (SOC 2, ISO 27001) for cloud services; data processing agreements in place |
 | Departmental | Penetration test; documented policies; access reviews quarterly |
-| Enterprise / sovereign | ISO 27001-aligned operations for the platform; alignment with Saudi NCA Essential Cybersecurity Controls or UAE Information Assurance standard as applicable; SIEM integration; customer-managed keys |
+| Enterprise / sovereign | ISO 27001-aligned operations for the platform; a registered Data Protection Officer and a documented transfer impact assessment for each cross-border flow; NPC registration of the processing system for the Philippine entity; SIEM integration; customer-managed keys |
 | Group-scale | Formal certification of the managed service; regular external audits; regulator engagement support |
 
 # 8. Responsibilities
@@ -125,7 +128,7 @@ Because the client's relationships span the GCC, the CRM stores each person's ju
 | Data classification rules and lawful basis | Decides | Implements and enforces in software |
 | Approval policies and approvers | Decides | Implements |
 | Application security, patching, monitoring | Informed | Owns (managed service) |
-| Incident response | Joint; client notified within agreed hours | Runs technical response |
+| Incident response | Joint; client notified within agreed hours, set to leave room inside the 72-hour regulatory clock in both jurisdictions | Runs technical response |
 | Regulatory filings and DPO duties | Owns | Provides evidence and reports |
 `,
 };

@@ -38,29 +38,29 @@ module.exports = {
 
 ## 3.1 Seeded scenario
 
-A fictional group, "Al Noor Holdings", is deciding whether to approve a supply contract with "Gulf Precision Industries" and is also progressing an investment discussion with "Marwa Capital". The demo corpus (about 60 documents in English and Arabic, some scanned) contains **deliberate contradictions and gaps**:
+A fictional group, "Sinaran Holdings", is deciding whether to approve a supply contract with "Selangor Precision Industries" and is also progressing an investment discussion with "Al Rayyan Capital", a Gulf investor it is courting as part of its GCC entry. The demo corpus (about 60 documents, mostly English with some Bahasa Malaysia, some scanned) contains **deliberate contradictions and gaps**. The scenario deliberately mirrors the client's own shape: a Malaysian and Philippine operating base, with a GCC relationship in the pipeline.
 
 %widths 8,52,40
 | # | Seeded issue | What the demo shows |
 |---|---|---|
-| 1 | Contract value AED 12.5m in Contract v2; AED 11.8m in the board approval memo | Contradiction flag with both quotes and pages; answer to "what is the contract value?" shows the conflict inline |
+| 1 | Contract value MYR 12.5m in Contract v2; MYR 11.8m in the board approval memo | Contradiction flag with both quotes and pages; answer to "what is the contract value?" shows the conflict inline |
 | 2 | Effective date 1 March in the contract; 15 March in the finance model's inputs | Date contradiction; explanation of tolerance rules |
 | 3 | Contract v1 has a 24-month term; Contract v2 has 36 months, marked as superseding | No contradiction flagged (version handling); the answer cites v2 |
 | 4 | Contract refers to "Annex B: performance bond" which is not in the corpus | Dangling-reference gap |
 | 5 | Decision "Approve supply contract" requires a legal opinion; none loaded | Checklist gap listed on the decision page |
-| 6 | Arabic-language board minute (scanned) records the approved amount | Arabic OCR, cross-language retrieval, cited answer in English |
-| 7 | Marwa Capital MoU date in CRM (12 March) differs from the signed MoU (14 March) | Cross-system finding shown on the relationship page |
+| 6 | Board minute in Bahasa Malaysia (scanned) records the approved amount | OCR on a scanned page, cross-language retrieval, cited answer returned in English |
+| 7 | Al Rayyan Capital MoU date in CRM (12 March) differs from the signed MoU (14 March) | Cross-system finding shown on the relationship page |
 | 8 | A question with no answer in the corpus: "What is the CEO's salary?" | Refusal with closest documents listed |
 
 ## 3.2 Demo flow (25 minutes)
 
 1. **Login with single sign-on** as an executive. Show the home page: open findings count, decisions with gaps, recent questions.
-2. **Ask in plain language:** "What is the value and term of the Gulf Precision supply contract?" Show the answer, citations, page viewer, and the inline contradiction note.
+2. **Ask in plain language:** "What is the value and term of the Selangor Precision supply contract?" Show the answer, citations, page viewer, and the inline contradiction note.
 3. **Open the finding.** Show both quotes side by side; assign an owner; add a resolution note; show it disappears from "open".
 4. **Open the decision "Approve supply contract".** Show present, missing and contradicted evidence; the Annex B dangling reference.
-5. **Ask in Arabic** or ask about the Arabic minute; show cross-language retrieval and citation of a scanned page.
+5. **Ask about the Bahasa Malaysia board minute** in English; show cross-language retrieval and citation of a scanned page.
 6. **Ask an unanswerable question.** Show the refusal.
-7. **Switch to the CRM.** Show the investor pipeline board (GCC stages), the Marwa Capital relationship page with history, follow-ups, and the finding from System 1 about the MoU date.
+7. **Switch to the CRM.** Show the investor pipeline board with the GCC stages, the Al Rayyan Capital relationship page with history, follow-ups, and the finding from System 1 about the MoU date.
 8. **Compose an outreach.** Request an AI-assisted draft; show the risk flags; submit; log in as an approver (different user); show that the drafter cannot approve; approve; show the message sent through the connected mailbox and the audit entry.
 9. **Reports.** Who was contacted this month; pipeline by stage; overdue follow-ups; approval turnaround.
 10. **Admin.** Show adding a custom field and a new stage without code; show the import preview; show the "remove demo data" action (do not run it).

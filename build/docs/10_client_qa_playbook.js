@@ -28,7 +28,7 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 ## A3. "Why not buy Salesforce or HubSpot for the CRM?"
 
-**Short answer:** You can, and your data will export to them cleanly if you ever want that. We are not recommending it as the core for three reasons: your mandatory human-approval gate is not how those products work by default; your data would sit outside the GCC; and the shared entity model with the intelligence assistant is much simpler on one platform. For the scope you described, a purpose-built CRM is smaller, cheaper to run, and fully under your control.
+**Short answer:** You can, and your data will export to them cleanly if you ever want that. We are not recommending it as the core for three reasons: your mandatory human-approval gate is not how those products work by default; your data would sit wherever that vendor holds it rather than in a region you choose; and the shared entity model with the intelligence assistant is much simpler on one platform. For the scope you described, a purpose-built CRM is smaller, cheaper to run, and fully under your control.
 
 **Do not say:** that those products are bad. They are excellent for large sales organisations.
 
@@ -64,9 +64,9 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 **Short answer:** You tell it once what evidence each type of decision needs; for example "approving a contract needs the signed contract, a board minute, a budget line and a legal opinion". The system checks the loaded documents against that list and shows what is present, what is missing and what is contradicted. It also flags references to documents that are not there, such as "see Annex B" when there is no Annex B.
 
-## B6. "What about Arabic documents?"
+## B6. "What about documents that are not in English?"
 
-**Short answer:** Supported end to end: Arabic OCR for scans, multilingual embeddings so an English question finds an Arabic clause, answers in the user's language, and a right-to-left interface. We report accuracy separately per language in the pilot.
+**Short answer:** Supported end to end: OCR for scans in the languages you use, multilingual embeddings so an English question finds a clause written in Bahasa Malaysia or Filipino, and answers in the user's language. We report accuracy separately per language in the pilot rather than as one blended number. Tell us the actual mix in your corpus and we will size the OCR and evaluation work to it.
 
 ## B7. "What about scanned PDFs and Excel models?"
 
@@ -76,7 +76,7 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 ## C1. "Where will our data be stored?"
 
-**Short answer:** In your own cloud account, in a GCC region you choose (UAE, Bahrain or Saudi Arabia are all available from the major providers), or on your premises. You own the accounts; we operate inside them.
+**Short answer:** In your own cloud account. For Malaysia that can genuinely mean in-country: AWS opened a Malaysia region in 2024 and Microsoft opened one in 2025. For the Philippines we should be straight with you: none of the major providers has a full region there, so the honest options are Singapore or Malaysia, or hosting it yourselves. You own the accounts; we operate inside them. When the GCC entity starts trading, adding a region there is a setting, not a rebuild.
 
 ## C2. "Does our data go to the AI company?"
 
@@ -92,9 +92,9 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 **Short answer:** Access follows your existing permissions: single sign-on, roles, and per-document access lists mirrored from SharePoint or set on upload. The filter is applied before retrieval, so the model never sees a passage the user cannot open. Every view and question is logged.
 
-## C5. "Is it compliant with PDPL?"
+## C5. "Is it compliant with our data protection law?"
 
-**Short answer:** It is designed to support compliance with the Saudi PDPL, the UAE federal law and the DIFC and ADGM regimes: lawful basis and consent per contact, residency by policy, data-subject request support, retention rules, audit trail, and cross-border transfer controls. Your legal team confirms the lawful basis and transfer mechanism; we implement and evidence it.
+**Short answer:** It is designed to support compliance with the Malaysian PDPA as amended in 2024, and the Philippine Data Privacy Act 2012: lawful basis and consent per contact, residency by policy, data-subject request support, retention rules, an audit trail, and cross-border transfer controls. Two things to note specifically. Malaysia now requires breach notification to the Commissioner **within 72 hours of the breach occurring**, so our incident process is built to that clock. And the Philippine NPC's model contractual clauses are voluntary rather than mandatory, so the accountability for the transfer sits with you; we provide the evidence. Your legal team confirms the lawful basis and transfer mechanism; we implement and evidence it.
 
 **Do not say:** "It is certified compliant". Compliance is a property of your organisation's processing, which the software supports.
 
@@ -146,7 +146,7 @@ Each question has a **short answer** (say this first), **the reasoning** (if the
 
 ## E3. "Which AI vendor are you tying us to?"
 
-**Short answer:** None. All model calls go through a gateway. We start with Claude because it performs well on long structured documents and is reachable from GCC cloud regions, but switching to another provider or to an in-country open model is a configuration change validated against your question set.
+**Short answer:** None. All model calls go through a gateway. We start with Claude because it performs well on long structured documents and is reachable from the Southeast Asian cloud regions, but switching to another provider or to an in-country open model is a configuration change validated against your question set.
 
 # F. Difficult or sceptical questions
 

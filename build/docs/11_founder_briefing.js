@@ -49,7 +49,7 @@ The system is limited to the client's loaded documents. No internet, no general 
 
 ## 3.4 Embeddings and vector search
 
-To find passages by meaning rather than by exact words, each passage is converted into a list of numbers (an "embedding") that captures its meaning. Similar meanings produce similar numbers. A "vector database" stores these numbers and finds the nearest ones to the question. This is how an English question finds an Arabic clause. We use PostgreSQL with the pgvector extension for this; no separate product needed at the start.
+To find passages by meaning rather than by exact words, each passage is converted into a list of numbers (an "embedding") that captures its meaning. Similar meanings produce similar numbers. A "vector database" stores these numbers and finds the nearest ones to the question. This is how an English question finds a clause written in Bahasa Malaysia. We use PostgreSQL with the pgvector extension for this; no separate product needed at the start.
 
 ## 3.5 Hybrid retrieval and re-ranking
 
@@ -81,7 +81,7 @@ One internal door through which all AI requests pass. It decides which model to 
 
 ## 3.12 Data residency and sovereignty
 
-**Residency**: where data is stored. **Sovereignty**: which country's laws govern it and whether it ever leaves. GCC clients care a lot. Our position: data at rest stays in a GCC region from day one; AI processing can be routed by policy, including to a model hosted inside the country (at higher cost). See Document 08 for the laws.
+**Residency**: where data is stored. **Sovereignty**: which country's laws govern it and whether it ever leaves. Our position: data at rest can stay in Malaysia from day one, because AWS and Microsoft both opened Malaysian regions (2024 and 2025). For the Philippines, say plainly that no major provider has a full region there, so the choices are Singapore, Malaysia, or hosting it themselves. Do not fudge this: they will check. AI processing can be routed by policy, including to a model hosted inside a named country, at higher cost. See Document 08 for the laws.
 
 ## 3.13 Open-weight models and self-hosting
 
@@ -89,15 +89,15 @@ Some strong models (Qwen, GLM, Gemma, DeepSeek) are published for anyone to run 
 
 ## 3.14 OCR
 
-Optical character recognition: turning a scanned image into text. Needed for scanned contracts and Arabic paperwork. We use a cloud OCR service available in the UAE region, or self-hosted OCR for the sovereign option.
+Optical character recognition: turning a scanned image into text. Needed for scanned contracts and older paperwork. We use a cloud OCR service available in the Malaysian and Singapore regions, or self-hosted OCR for the sovereign option.
 
 ## 3.15 CRM
 
-Customer relationship management software: a structured record of organisations, people, the state of each relationship ("stage"), interactions, and tasks. Ours is purpose-built and small, with three category pipelines and a GCC-specific one.
+Customer relationship management software: a structured record of organisations, people, the state of each relationship ("stage"), interactions, and tasks. Ours is purpose-built and small, with three category pipelines plus a GCC one for the market they are entering.
 
 ## 3.16 Pipeline and stages
 
-A pipeline is the sequence of stages a relationship moves through. Our GCC pipeline example: introduction through an intermediary; first meeting; NDA; qualification; active discussion; term sheet or MoU; regulatory or board approval; signed; dormant. Stages are configurable by category.
+A pipeline is the sequence of stages a relationship moves through. Our GCC pipeline example: introduction through an intermediary; first meeting; NDA; qualification; active discussion; term sheet or MoU; regulatory or board approval; signed; dormant. It is longer at the front than a domestic pipeline because entering a new market means the trust-building steps come before the commercial ones. Stages are configurable by category.
 
 ## 3.17 Human-in-the-loop and the approval gate
 
@@ -160,7 +160,7 @@ Models are priced per million "tokens" (roughly three-quarters of a word). A 30-
 | Chunk | A passage of a document (a few hundred words) stored for retrieval |
 | Claims ledger | Table of extracted facts used to detect contradictions |
 | Cross-region inference | Cloud AI processing that may route a request to another region for capacity |
-| DIFC / ADGM | Dubai and Abu Dhabi financial free zones with their own data protection laws |
+| DPO | Data protection officer: now a mandatory appointment under the amended Malaysian PDPA and under the Philippine DPA |
 | Embedding | Numeric representation of meaning used for semantic search |
 | Entra ID | Microsoft's identity service (formerly Azure Active Directory) |
 | Four-eyes | A second person must approve; drafter cannot self-approve |
@@ -170,15 +170,15 @@ Models are priced per million "tokens" (roughly three-quarters of a word). A 30-
 | IdP | Identity provider (Microsoft Entra ID, Okta, Google) |
 | LLM | Large language model |
 | MFA | Multi-factor authentication |
+| NPC | National Privacy Commission: the Philippine data protection regulator |
 | OCR | Optical character recognition (scans to text) |
 | OIDC | OpenID Connect: the standard for single sign-on |
-| PDPL | Personal Data Protection Law (Saudi Arabia; UAE also uses the term) |
+| PDPA | Personal Data Protection Act (Malaysia), as amended by the 2024 Amendment Act |
 | pgvector | PostgreSQL extension for vector search |
 | RAG | Retrieval-augmented generation |
 | Re-ranker | Model that orders retrieved passages by relevance |
 | RLS | Row-level security: database-enforced access filtering |
 | RTO / RPO | Recovery time objective / recovery point objective for disasters |
-| SDAIA | Saudi Data and AI Authority (PDPL regulator) |
 | SIEM | Security information and event management system |
 | SLA | Service level agreement |
 | SSO | Single sign-on |

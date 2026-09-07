@@ -24,7 +24,7 @@ First-meeting edition, September 2026. Eighteen documents plus diagrams. Every W
 | 05 | `05_Cost_and_Pricing_Model.xlsx` | Live formulas: assumptions and unit prices, rate card, monthly run cost by tier (pilot to group scale), build effort and fees by phase, milestone schedule, three pricing options, three-year TCO | Sponsor, procurement, presenter |
 | 06 | `06_Technology_Stack_and_Tools.docx` / `.pdf` | Every product and service: what it does, why chosen, price, alternatives; what was considered and not chosen | Client IT, procurement, presenter |
 | 07 | `07_Data_Onboarding_and_Integration_Guide.docx` / `.pdf` | How real documents, contacts and systems plug in later without a rebuild | Client IT and operations |
-| 08 | `08_Security_Privacy_and_Governance.docx` / `.pdf` | Security architecture, audit, data residency patterns, GCC data protection landscape (KSA, UAE, DIFC, ADGM, Qatar, Bahrain, Oman, Kuwait), AI governance, responsibilities | Client CISO, legal, compliance |
+| 08 | `08_Security_Privacy_and_Governance.docx` / `.pdf` | Security architecture, audit, data residency patterns, data protection landscape (Malaysia PDPA as amended, Philippines Data Privacy Act, GCC as future expansion), AI governance, responsibilities | Client CISO, legal, compliance |
 | 09 | `09_Risk_Register.xlsx` | 22 scored risks with mitigations, owners, triggers; scoring guide | Sponsor, PMO |
 | 10 | `10_Client_Questions_and_Answers_Playbook.docx` / `.pdf` | 30+ anticipated questions with short answers, reasoning, and what not to say | Presenter only |
 | 11 | `11_Presenter_Briefing_Concepts_and_Glossary.docx` / `.pdf` | Every concept explained from first principles; numbers to remember; phrases that land; glossary | Presenter only |
@@ -49,7 +49,7 @@ First-meeting edition, September 2026. Eighteen documents plus diagrams. Every W
 
 - Replace `[Client legal entity]`, `[Supplier legal entity]` and the governing-law placeholder in document 14.
 - Set the blended rate and support tier on the `Rate_Card` sheet of document 05 so fees reflect your delivery model; the defaults are an average of an indicative rate card.
-- Re-verify the 2026 list prices and the GCC model-availability statements in documents 06 and 08; both change quickly.
+- Re-verify the 2026 list prices and the regional model-availability statements in documents 06 and 08; both change quickly.
 - Add your company name, logo and contact details to the cover pages and the deck title slide.
 
 ## Rebuilding the package

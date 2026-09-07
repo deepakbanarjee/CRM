@@ -20,8 +20,8 @@ This Statement of Work ("SOW") is between [Client legal entity] ("Client") and [
 ## 2.1 In scope
 
 - Phase 0 Discovery; Phase 1 Foundation and working structure; Phase 2 Verification layer and approval gate, culminating in the integrated working demo; Phase 3 Pilot with real data; Phase 4 Production hardening and go-live, as defined in the Implementation Roadmap (Document 04).
-- Deployment in the Client's cloud account in a GCC region under deployment Pattern A or B.
-- English and Arabic language support.
+- Deployment in the Client's cloud account in a Malaysian or Singapore region under deployment Pattern A or B.
+- English language support, plus the further languages identified during discovery and recorded in the discovery report.
 - Up to three connectors (for example SharePoint or OneDrive, Microsoft 365 mailbox, CSV/XLSX import).
 - Training for pilot users and administrators; documentation and hand-over package.
 
@@ -110,7 +110,7 @@ Cloud hosting, AI model usage, OCR, embeddings, messaging and any third-party li
 
 # 11. Governing law and dispute resolution
 
-[To be agreed: for example DIFC Courts or the Saudi Center for Commercial Arbitration, depending on the Client's jurisdiction.]
+[To be agreed: for example the courts of Malaysia, the Asian International Arbitration Centre in Kuala Lumpur, or the Singapore International Arbitration Centre, depending on the Client's contracting entity.]
 
 # 12. Signatures
 

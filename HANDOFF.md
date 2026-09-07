@@ -1,8 +1,8 @@
 # CRM Proposal Pack — Context Handoff
 
-_A self-contained briefing for a new session. Written 2026-09-07 against
-`claude/ai-executive-intelligence-plan-kcgdni`. Read this before touching anything in
-`proposal/`. The immediate job is described in section 8._
+_A self-contained briefing for a new session. Written 2026-09-07, updated the same day after the
+Philippines/Malaysia correction was propagated through the whole pack. Read this before touching
+anything in `proposal/`. Section 8 records what was changed and what is still open._
 
 ---
 
@@ -81,14 +81,23 @@ What this invalidates across the pack:
   breach notification to the Commissioner **within 72 hours**, Transfer Impact Assessments
   required for cross-border transfers, max fine raised to RM1,000,000.
 - **Philippines DPA 2012**: cross-border transfer permitted with a comparable level of
-  protection; NPC has issued **Model Contractual Clauses** (Advisory 2024-01); Privacy Impact
-  Assessments expected for cross-border transfers.
+  protection; NPC has issued **Model Contractual Clauses** (Advisory 2024-01, 30 May 2024);
+  Privacy Impact Assessments expected for cross-border transfers.
+
+**Two refinements found when the correction was applied** (both are now reflected in the pack):
+
+- The NPC's model contractual clauses are **voluntary and encouraged, not mandatory**, and the
+  NPC does not review agreements for conformity. Do not describe them as required.
+- AWS runs a **Local Zone in Manila**, which is a latency extension of the Singapore region
+  rather than a region in its own right. It is not a data-residency answer on its own, and
+  saying so plainly is more credible than omitting it. Exact identifiers now used in the pack:
+  AWS `ap-southeast-5` (opened August 2024) and Azure **Malaysia West** (GA 28 May 2025).
 
 **The GCC relationship pipeline stays.** The client explicitly asked for it, and it makes sense
 as the pipeline for a market they are entering. Where the *data* lives is a separate question
 from what the *pipeline stages* are called. Do not delete the GCC pipeline.
 
-**Document 18 has already been corrected** (see section 6). **Everything else has not.**
+**The correction has now been propagated through the whole pack** (see section 8). Documents 01, 03, 04, 06, 07, 08, 10, 11, 12, 13, 14, 16, 17, the deck, the three workbooks, the diagrams, the package index and the README were all updated and rebuilt.
 
 ---
 
@@ -217,48 +226,46 @@ been updated to reflect the AI-agent delivery model.
 
 ---
 
-## 8. THE JOB FOR THE NEXT SESSION
+## 8. THE CORRECTION HAS BEEN PROPAGATED
 
-The user's instruction, verbatim: _"update this document now and save the context for a new
-chat. we will update the whole documents there."_
+The Philippines/Malaysia correction has been applied across the whole pack and every artefact
+rebuilt. What was changed:
 
-Document 18 is done. **The task is to propagate the Philippines/Malaysia correction through the
-rest of the pack.** In priority order:
+| Document | Change |
+|---|---|
+| 08 Security | Section 4 rewritten: Malaysia PDPA (2024 Amendment, in force 1 June 2025) and Philippines DPA 2012, with a third row for the GCC as a *future* jurisdiction. Section 3 reworked around AWS `ap-southeast-5` / Azure Malaysia West, with the Philippines' lack of a local region stated plainly. Compliance tiers, AI-governance rows and the incident-response row updated |
+| 02 Deck | Slide 11 (residency) retitled and its speaker notes rewritten; compliance-by-design card, gaps slide, pipeline slide and the brief-back notes corrected |
+| 16 / 17 Replies | Cloud-region and language lines corrected in both; 17 re-rendered. **16 was held to two pages** — it spills to three if the residency paragraph grows |
+| 03 Architecture | Deployment patterns A/B, document store, hosting rows, OCR and language-detection steps, and the NFR languages row |
+| 06 Stack | OCR service and region, Bedrock access routes, embedding alternatives, identity-provider norm, WhatsApp rationale, off-the-shelf CRM comparison |
+| 01, 04, 07, 10, 11, 12, 13, 14 | Language assumptions, residency lines, the C5 compliance answer, glossary (PDPL/SDAIA/DIFC replaced with PDPA/NPC/DPO), demo scenario, gaps 1/2/11, SoW scope and governing-law placeholder |
+| 05 Cost model | OCR-share justification, OCR and GPU region notes, three "Managed PostgreSQL in region" row labels **and the formulas referencing them by name**, rate-card market ranges. Recalculated: 173 formulas, 0 errors, total build unchanged at ~USD 352k |
+| 09 / 15 Workbooks | Lawful-basis, model-availability, extraction-accuracy and multilingual-effort risks; RTM rows R4, C1, N1 |
+| Diagrams | Residency panel A/B text, ingestion and pipeline labels, and the claims-ledger currency (AED to MYR) |
+| Index / README | Document 08 summary line and the re-verification note |
 
-1. **Document 08 (Security, Privacy and Governance)** — biggest job. Replace the GCC data
-   protection landscape section with Malaysia PDPA (incl. 2025 amendments: DPO, 72-hour breach
-   notification, TIAs) and Philippines DPA 2012 (comparable protection, NPC Model Contractual
-   Clauses, PIAs). Rework the three residency patterns around Malaysia in-country / Singapore /
-   sovereign. Keep GCC as a *future expansion* consideration.
-2. **Document 02 (the deck)** — slide 11 is the residency slide, entirely GCC-framed. Also check
-   speaker notes throughout for "GCC region" and Arabic.
-3. **Documents 16 and 17 (the two replies)** — both say "your own cloud account in a GCC region"
-   and 16 says "Arabic and English throughout, including scans." 17 is HTML → re-render with
-   Playwright after editing.
-4. **Document 03 (architecture)** — section 3.5 deployment patterns, section 13 non-functional
-   requirements (says "English and Arabic").
-5. **Documents 01, 04, 06, 13, 14** — grep for `GCC`, `Arabic`, `UAE`, `Saudi`, `DIFC`, `ADGM`,
-   `me-central-1`, `me-south-1`, `UAE North`.
-6. **Document 09 (risk register)** — the residency and Arabic risks need rewording.
-7. **Document 05 (cost model)** — the Assumptions sheet has an OCR-share row justified by
-   "GCC corpora often have many scanned Arabic pages". Reword; the number itself may still hold.
+**The GCC pipeline was kept everywhere**, reframed as the pipeline for a market being entered
+rather than a home market. The demo scenario in document 12 now uses "Sinaran Holdings",
+"Selangor Precision Industries" and a Gulf investor "Al Rayyan Capital", which exercises the GCC
+pipeline honestly, with a scanned Bahasa Malaysia board minute in place of the Arabic one.
 
-**Useful first command:**
+**Two deliberate survivals** of the old terms, both correct: document 08's "GCC (future)" row
+names Saudi PDPL, SDAIA, DIFC and ADGM as forward-looking context, and document 13's gap 1 says
+Arabic *should not be assumed*. A grep for those terms should find these two and nothing else.
 
-```bash
-grep -rn "GCC\|Arabic\|UAE\|Saudi\|DIFC\|ADGM\|me-central\|me-south\|Bahrain\|Dammam" build/ --include=*.js --include=*.py | grep -v node_modules
-```
+### Still open
 
-**Before editing, confirm with the user:**
-
-- Whether the GCC entity is in scope for the *first release* or later. This decides whether
-  document 08 covers three jurisdictions or two.
-- Which languages actually appear in their documents. Document 18 now asks the client this, but
-  the user may already know.
-- Whether to update the staffing sections to reflect AI-agent delivery plus a named senior
-  engineer (section 7).
-
----
+- **The three questions in the old section 8 were never put to the user.** The correction was
+  applied on these assumptions, which the client should confirm: the GCC entity is **not** in
+  the first release (so document 08 covers two jurisdictions plus a forward-looking third);
+  English is the business language with Bahasa Malaysia, Filipino and Chinese as the likely
+  others; and **staffing was left untouched** (see section 7 - the roadmap and cost model still
+  say "team of 3-4" and do not reflect the AI-agent delivery model).
+- Page counts: documents **10 (7 to 8)** and **13 (5 to 6)** each grew a page, from the added
+  compliance answer and the rewritten gaps. Everything else is unchanged.
+- The footer on every Word document still reads "NN **of 15**" although the pack is eighteen
+  documents. Pre-existing, not touched, worth fixing before anything goes out.
+- The placeholders in section 10 are still unfilled.
 
 ## 9. Conventions to preserve
 
@@ -279,9 +286,14 @@ grep -rn "GCC\|Arabic\|UAE\|Saudi\|DIFC\|ADGM\|me-central\|me-south\|Bahrain\|Da
 
 ## 10. State as of this handoff
 
-- Branch `claude/ai-executive-intelligence-plan-kcgdni`, pushed, working tree clean.
-- All 18 documents build and render. Page counts: 01=3, 03=18, 04=7, 06=7, 07=5, 08=8, 10=7,
-  11=8, 12=5, 13=5, 14=6, 16=2, 17=2, 18=4.
+- Branch `claude/document-correction-propagation-1db948`, pushed, working tree clean.
+- All 18 documents build and render. Page counts: 01=3, 03=18, 04=7, 06=7, 07=5, 08=8, **10=8**,
+  11=8, 12=5, **13=6**, 14=6, 16=2, 17=2, 18=4.
+- **Build environment note:** this container ships LibreOffice *core* only. `finalize_docx.py`
+  fails with "type detection failed" until `libreoffice-writer` is installed, and the xlsx
+  `recalc.py` hangs until `libreoffice-calc` is installed. The old note blaming the working
+  directory was a misdiagnosis; run `apt-get install -y libreoffice-writer libreoffice-calc`
+  first. Playwright is still global, so `NODE_PATH=$(npm root -g)` is still required.
 - Placeholders still to fill before anything goes out: `[Client legal entity]`,
   `[Supplier legal entity]` and governing law in document 14; the blended rate on the
   `Rate_Card` sheet of document 05 (currently an average of an indicative rate card, producing

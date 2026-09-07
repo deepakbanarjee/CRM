@@ -25,7 +25,7 @@ Every core record (organisation, person, relationship, document, claim, follow-u
 | Configurable item | Examples |
 |---|---|
 | Categories | Investor, partner/counterparty, customer/member; sub-types such as sovereign fund, family office, bank, EPC contractor |
-| Pipelines and stages per category | GCC relationship pipeline: introduction through intermediary; first majlis or meeting; NDA; qualification; active discussion; term sheet or MoU; regulatory or board approval; signed; dormant. Each stage has SLA days and exit criteria. |
+| Pipelines and stages per category | GCC relationship pipeline, for the market the group is entering: introduction through an intermediary; first meeting; NDA; qualification; active discussion; term sheet or MoU; regulatory or board approval; signed; dormant. Each stage has SLA days and exit criteria. |
 | Decision types and evidence checklists | "Approve contract" needs signed contract, board minute, budget line, legal opinion. "Investor commitment" needs KYC file, subscription agreement, source-of-funds letter. |
 | Approval policies | Who approves outreach per category; minimum approvers; escalation time; restricted recipients |
 | Classification and routing | Which document folders are "restricted"; which model handles which classification |
@@ -69,7 +69,7 @@ All sample records carry an "is_demo" marker. One administrator action deletes d
 - De-duplication of organisations by legal name, registration number and aliases; of persons by email and phone; merge with history preserved.
 - Document version detection by checksum, filename pattern and metadata; administrators confirm "supersedes" links so that superseded values are not flagged as contradictions.
 - Mandatory fields per category (configurable). Consent status required before outreach to a person.
-- Arabic and English names stored side by side; search matches either.
+- Where a person or organisation has a name in more than one language or script, both are stored side by side and search matches either.
 
 # 5. Getting data out
 

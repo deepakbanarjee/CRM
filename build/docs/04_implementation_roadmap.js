@@ -24,9 +24,9 @@ module.exports = {
 | Item | Detail |
 |---|---|
 | Objectives | Fix scope, jurisdictions and residency pattern; obtain sample documents; define decision types and pipeline stages; create environments in the client's cloud account. |
-| Activities | Kick-off workshop (half day); two working sessions with management on decision types and "questions we ask most"; one session with relationship managers on categories, stages and the GCC pipeline; identity provider and mailbox platform confirmation; data protection review with the client's legal or compliance contact; environment provisioning with infrastructure as code. |
+| Activities | Kick-off workshop (half day); two working sessions with management on decision types and "questions we ask most"; one session with relationship managers on categories, stages and the GCC pipeline for the market being entered; identity provider and mailbox platform confirmation; data protection review with the client's legal or compliance contact; environment provisioning with infrastructure as code. |
 | Deliverables | Signed-off scope note; decision-type catalogue (first 5-10 types) and evidence checklists; pipeline and stage definitions per category; residency and hosting decision record; golden question set v0 (50 questions); environment access. |
-| Client inputs | Sponsor and product owner named; 50-200 sample documents under NDA (mixed formats, some Arabic, some scanned); sample contact list (can be anonymised); access to identity provider tenant. |
+| Client inputs | Sponsor and product owner named; 50-200 sample documents under NDA (mixed formats, a representative spread of languages, some scanned); sample contact list (can be anonymised); access to identity provider tenant. |
 | Exit criteria | Scope note signed; environments reachable; sample corpus received. |
 
 ## Phase 1: Foundation and working structure (weeks 1-6)
@@ -90,7 +90,7 @@ Options, each scoped and priced separately once the base is live:
 | Second full-stack or AI engineer | 50-100% from week 5 | Approval workflow, integrations, throughput on Phase 2 |
 | QA and evaluation analyst | 30-50% | Golden set, test automation, evaluation reports, user acceptance |
 | Project manager / delivery coordinator | 30% | Plan, risks, client communications, weekly reporting |
-| UX designer | 20% (weeks 1-8) | Interface design, Arabic layout, usability tests |
+| UX designer | 20% (weeks 1-8) | Interface design, multilingual layout, usability tests |
 | Security and DevOps specialist | 20%, higher in Phase 4 | Infrastructure as code, hardening, penetration test coordination |
 
 Client-side roles needed: executive sponsor (1 hour per week), product owner (4-6 hours per week), IT contact for identity and mailbox connection, legal or compliance contact for data protection, 10-20 pilot users in Phase 3.

@@ -75,7 +75,7 @@ for i, t in enumerate(pl):
 ax.add_patch(Rectangle((0.04, 0.16), 0.44, 0.40, fc=WHITE, ec=NAVY, lw=1.5))
 ax.text(0.26, 0.525, "SYSTEM 1  -  AI Executive Intelligence Assistant", ha="center",
         fontsize=10.5, fontweight="bold", color=NAVY)
-s1 = ["Secure document ingestion\n(parse, OCR, Arabic + English)",
+s1 = ["Secure document ingestion\n(parse, OCR, multilingual)",
       "Retrieval with citations\n(hybrid search + re-ranking)",
       "Claims ledger: contradiction\n& missing-information detection",
       "Plain-language Q&A grounded\nonly in the loaded document set"]
@@ -86,7 +86,7 @@ ax.add_patch(Rectangle((0.52, 0.16), 0.44, 0.40, fc=WHITE, ec=NAVY, lw=1.5))
 ax.text(0.74, 0.525, "SYSTEM 2  -  CRM + Follow-up System", ha="center",
         fontsize=10.5, fontweight="bold", color=NAVY)
 s2 = ["Contacts & relationships across investors,\npartners/counterparties, customers/members",
-      "Configurable pipelines & stages\n(incl. GCC-specific relationship pipeline)",
+      "Configurable pipelines & stages\n(incl. a GCC pipeline for market entry)",
       "Follow-up scheduling, reminders, overdue tracking",
       "Human-approval gate on every outbound message\n(no fully automated outreach)"]
 for i, t in enumerate(s2):
@@ -117,7 +117,7 @@ fig, ax = canvas(13, 6.2)
 ax.text(0.5, 0.96, "System 1: how a document becomes a trusted, cited answer", ha="center",
         fontsize=14, fontweight="bold", color=NAVY)
 ax.text(0.03, 0.845, "INGESTION (happens once per document)", fontsize=10, fontweight="bold", color=TEAL)
-steps = ["1. Upload or\nconnector sync", "2. Virus scan &\nclassification", "3. Parse & OCR\ntables, scans,\nArabic + English",
+steps = ["1. Upload or\nconnector sync", "2. Virus scan &\nclassification", "3. Parse & OCR\ntables, scans,\nmultilingual",
          "4. Chunk with\npage references", "5. Embed &\nindex", "6. Extract claims\nfacts, figures,\ndates, terms"]
 n = len(steps)
 w = 0.14
@@ -149,8 +149,8 @@ save(fig, "02_eia_pipeline.png")
 fig, ax = canvas(13, 6.6)
 ax.text(0.5, 0.96, "Contradiction and gap detection: the claims ledger", ha="center",
         fontsize=14, fontweight="bold", color=NAVY)
-docs = [("Contract v2.pdf\n(p.14)", "Contract value\n= AED 12.5m"), ("Board approval.docx\n(p.2)", "Contract value\n= AED 11.8m"),
-        ("Financial model.xlsx\n(Sheet: Inputs)", "Contract value\n= AED 12.5m")]
+docs = [("Contract v2.pdf\n(p.14)", "Contract value\n= MYR 12.5m"), ("Board approval.docx\n(p.2)", "Contract value\n= MYR 11.8m"),
+        ("Financial model.xlsx\n(Sheet: Inputs)", "Contract value\n= MYR 12.5m")]
 for i, (d, c) in enumerate(docs):
     y = 0.72 - i * 0.22
     box(ax, 0.03, y, 0.20, 0.15, d, fc=ICE, tc=NAVY, fs=9)
@@ -206,12 +206,12 @@ fig, ax = canvas(13, 6.4)
 ax.text(0.5, 0.96, "Where the data and the AI model live: three deployment patterns", ha="center",
         fontsize=14, fontweight="bold", color=NAVY)
 opts = [("PATTERN A  -  Cloud, managed AI",
-         "Documents & database stored in a GCC cloud\nregion (UAE / Bahrain / KSA).\nAI inference via a frontier model API\n(Claude via AWS Bedrock cross-region,\nAnthropic API, Microsoft Foundry).\n\n"
-         "Fastest, cheapest, highest AI quality.\nPrompts may be processed outside the GCC\nin transit (encrypted, not stored by the\nprovider under enterprise terms).",
+         "Documents & database stored in Malaysia\n(AWS ap-southeast-5 / Azure Malaysia West)\nor Singapore. No major provider has a full\nregion in the Philippines.\nAI inference via a frontier model API\n(Claude via AWS Bedrock cross-region,\nAnthropic API, Microsoft Foundry).\n\n"
+         "Fastest, cheapest, highest AI quality.\nPrompts may be processed outside the\ncountry in transit (encrypted, not stored\nby the provider under enterprise terms).",
          TEAL),
         ("PATTERN B  -  Hybrid by classification",
          "Same as A for internal / non-sensitive\ndocuments. Documents tagged 'restricted'\nor containing personal data are routed\nonly to an in-region model.\n\n"
-         "Best balance for most GCC groups.\nRequires a document classification\nstep at ingestion (we build it in).",
+         "Our recommended target state.\nRequires a document classification\nstep at ingestion (we build it in).",
          NAVY),
         ("PATTERN C  -  Fully sovereign",
          "Everything, including the AI model, runs\non GPUs inside the country (cloud region\nor private data centre). Open-weight models\n(e.g. Qwen 3.5, GLM-5, Gemma 4) served\nwith vLLM.\n\n"

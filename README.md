@@ -3,7 +3,7 @@
 Proposal package for a first-level client meeting, covering two interconnected systems on one shared platform:
 
 - **System 1: AI Executive Intelligence Assistant.** Closed-domain retrieval over corporate documents with a verification layer: cited answers, contradiction detection through a claims ledger, missing-information tracking through decision checklists, and refusal when the documents do not contain the answer.
-- **System 2: CRM + Follow-up System.** Relationship records and configurable pipelines for investors, partners/counterparties and customers/members (including a GCC-specific pipeline), follow-up reminders, reporting, and a human-approval gate on every outbound message.
+- **System 2: CRM + Follow-up System.** Relationship records and configurable pipelines for investors, partners/counterparties and customers/members (including a GCC pipeline for the market the client is entering), follow-up reminders, reporting, and a human-approval gate on every outbound message.
 
 ## Contents
 

@@ -37,7 +37,7 @@ This document has two halves. **Part A (sections 2-6)** is the high-level plan: 
 %widths 8,32,60
 | # | Requirement (client wording) | What it means in engineering terms |
 |---|---|---|
-| C1 | Three categories: investors; partners/counterparties; customers/members; GCC-specific relationship pipeline | Relationship records typed by category, each with its own configurable pipeline and stage set; a GCC pipeline template reflecting introduction, trust-building and regulatory steps. |
+| C1 | Three categories: investors; partners/counterparties; customers/members; GCC-specific relationship pipeline | Relationship records typed by category, each with its own configurable pipeline and stage set; a GCC pipeline template for the market the client is entering, reflecting introduction through an intermediary, trust-building and regulatory steps. |
 | C2 | Contact and relationship records with stage/status tracking | Organisation and Person entities, Relationship records with stage, owner, status, last touch, next action; full history of stage changes. |
 | C3 | Follow-up scheduling and reminders | Follow-up tasks with due dates and owners; reminders to staff by email/Teams/in-app; overdue escalation. |
 | C4 | Any outreach must go through human approval before sending; no fully automated outbound | Outreach Request workflow: draft, review queue, approve/reject with reason, send via connected mailbox under the approver's authority, immutable log. No scheduler may send. |
@@ -67,7 +67,7 @@ Each product remains **individually deployable and individually usable**. The CR
 |---|---|---|
 | Identity and access | Single sign-on, roles (executive, relationship manager, approver, analyst, admin), per-document and per-record permissions | Supabase Auth with OIDC -> Microsoft Entra ID / Okta; Keycloak if self-hosted |
 | Entity registry | Master list of organisations and people with de-duplication and merge; used by both systems | PostgreSQL tables with matching rules |
-| Document store | Original files, versions, checksums, classification tags, access-control lists | Supabase Storage -> S3 / Azure Blob in a GCC region, or on-premises object storage |
+| Document store | Original files, versions, checksums, classification tags, access-control lists | Supabase Storage -> S3 / Azure Blob in a Malaysian or Singapore region, or on-premises object storage |
 | Model gateway | One internal API for all AI calls; routes by policy (document classification, cost, residency); logs tokens and cost; swaps providers without code change | LiteLLM proxy (open source) in front of Anthropic API / AWS Bedrock / Microsoft Foundry / in-region vLLM |
 | Workflow and events | Background jobs (ingestion, extraction, reminders), event bus so systems react to each other | PostgreSQL job queue -> Redis + workers; Temporal if workflows become complex |
 | Audit log | Append-only record of every read, answer, approval and send, with hash chaining | PostgreSQL append-only table with periodic hash anchoring; export to SIEM at enterprise tier |
@@ -77,11 +77,11 @@ Each product remains **individually deployable and individually usable**. The CR
 
 ![Figure 2. How a document becomes a trusted, cited answer|6.6](diagrams/02_eia_pipeline.png)
 
-Two flows. **Ingestion** runs once per document version: scan, classify, parse (including OCR for scans, in Arabic and English), chunk with page references, embed and index, and extract claims into the ledger. **Answering** runs on every question: apply the user's permissions, retrieve by keyword and meaning, re-rank, draft an answer with citations, check grounding, and either deliver or decline. Everything is logged.
+Two flows. **Ingestion** runs once per document version: scan, classify, parse (including OCR for scans, in the languages the corpus actually uses), chunk with page references, embed and index, and extract claims into the ledger. **Answering** runs on every question: apply the user's permissions, retrieve by keyword and meaning, re-rank, draft an answer with citations, check grounding, and either deliver or decline. Everything is logged.
 
 ![Figure 3. Contradiction and gap detection through the claims ledger|6.6](diagrams/03_claims_ledger.png)
 
-The claims ledger is the part that makes this more than a chatbot. Extraction turns prose into rows: "Contract value = AED 12.5m (Contract v2.pdf, p.14)". Comparison then finds the row from the board minute that says AED 11.8m. Decision checklists list what evidence each decision type needs and mark what is present, what is missing, and what is contradicted.
+The claims ledger is the part that makes this more than a chatbot. Extraction turns prose into rows: "Contract value = MYR 12.5m (Contract v2.pdf, p.14)". Comparison then finds the row from the board minute that says MYR 11.8m. Decision checklists list what evidence each decision type needs and mark what is present, what is missing, and what is contradicted.
 
 ## 3.4 System 2 at a glance
 
@@ -95,8 +95,8 @@ The CRM is deliberately conventional in its records and pipelines, and deliberat
 
 The client will need to decide where data at rest and AI processing may take place. The architecture supports three patterns, selectable by configuration:
 
-- **Pattern A, cloud with managed AI.** Data at rest in a GCC cloud region (for example AWS UAE me-central-1 or Bahrain me-south-1, Azure UAE North, Google Cloud Dammam). AI calls go to a frontier model provider. As of early 2026, Claude models are reachable from the AWS Middle East regions through Amazon Bedrock's global cross-region inference, which means prompts may be processed outside the region in transit under AWS encryption and enterprise terms. This is the fastest and cheapest pattern and gives the highest model quality.
-- **Pattern B, hybrid by classification.** Same as A for internal and non-sensitive material; documents tagged restricted, or containing personal data, are routed by the model gateway only to an in-region model. Our recommended target state for most GCC groups.
+- **Pattern A, cloud with managed AI.** Data at rest in a regional cloud account: **AWS Asia Pacific (Malaysia) ap-southeast-5** or **Azure Malaysia West** for in-country Malaysian residency, or **Singapore** (ap-southeast-1, Azure Southeast Asia, Google asia-southeast1) where a single regional footprint is preferred. Note that no major provider operates a full region in the Philippines, so Philippine data sits in Singapore or Malaysia under this pattern. AI calls go to a frontier model provider. As of early 2026, Claude models are reached through Amazon Bedrock's cross-region inference, which means prompts may be processed outside the country of origin in transit, under AWS encryption and enterprise terms. This is the fastest and cheapest pattern and gives the highest model quality.
+- **Pattern B, hybrid by classification.** Same as A for internal and non-sensitive material; documents tagged restricted, or containing personal data, are routed by the model gateway only to an in-region model. Our recommended target state for this client.
 - **Pattern C, fully sovereign.** All processing, including the model, runs on GPUs inside the country, either in a hyperscaler's local region or a private data centre, using open-weight models (for example Qwen 3.5, GLM-5, Gemma 4) served with vLLM. Highest control; higher fixed cost; model quality a step behind frontier APIs.
 
 We recommend **starting on Pattern A for the demo, designing for Pattern B, and keeping Pattern C as a documented upgrade path**. The gateway makes this a configuration change, not a rebuild.
@@ -152,7 +152,7 @@ The full plan with staffing, dependencies and acceptance criteria is in Document
 %widths 22,16,62
 | Component | Language / runtime | Responsibilities and notes |
 |---|---|---|
-| Web application | Next.js (React, TypeScript) | Single sign-on, assistant chat and findings pages, CRM pages (contacts, pipeline board, follow-ups, approval queue, dashboards), administration (configuration, imports, connectors). Responsive; works in mobile browsers. Arabic right-to-left layout supported. |
+| Web application | Next.js (React, TypeScript) | Single sign-on, assistant chat and findings pages, CRM pages (contacts, pipeline board, follow-ups, approval queue, dashboards), administration (configuration, imports, connectors). Responsive; works in mobile browsers. The interface is localisable, and right-to-left layout is supported should it be needed later. |
 | Core API | Node.js (TypeScript) | Business logic for CRM and platform: entities, relationships, tasks, outreach workflow, audit, configuration. Exposes REST endpoints and webhooks. |
 | Intelligence service | Python (FastAPI) | Document ingestion, parsing and OCR orchestration, chunking, embedding, claims extraction, retrieval, answer generation, grounding check, contradiction and gap detection. Python is used because the document and AI tooling ecosystem is strongest there. |
 | Workers | Python and Node | Background jobs: ingestion pipeline, scheduled extraction re-runs, reminder generation, connector syncs. Pull from a job queue; horizontally scalable. |
@@ -220,10 +220,10 @@ All tables carry: id (UUID), tenant_id, created_at, created_by, updated_at, upda
 
 1. **Receive.** Upload via UI, or connector sync (SharePoint/OneDrive/Drive/mailbox). Compute checksum; if identical to an existing document, link rather than duplicate. Detect version relationships by filename pattern and metadata; administrator can confirm "supersedes".
 2. **Scan and classify.** Anti-malware scan (ClamAV or cloud-native). Classification by rule (source folder, filename) and by a lightweight model pass; administrator can override. Classification drives the model-routing policy.
-3. **Parse.** Digital PDFs, Word, Excel, PowerPoint and email via Docling (open source, runs locally, strong table extraction). Scanned pages via OCR with Arabic and English support (Azure AI Document Intelligence in the Azure UAE region, or Tesseract/PaddleOCR self-hosted for the sovereign pattern). Excel: each sheet is parsed into cell-level text with sheet and cell references so citations can point to "Sheet Inputs, cell C14".
+3. **Parse.** Digital PDFs, Word, Excel, PowerPoint and email via Docling (open source, runs locally, strong table extraction). Scanned pages via OCR (Azure AI Document Intelligence, available in the Azure Malaysia West and Southeast Asia regions, or Tesseract/PaddleOCR self-hosted for the sovereign pattern). The OCR service is configured for the languages the corpus actually contains, confirmed at discovery. Excel: each sheet is parsed into cell-level text with sheet and cell references so citations can point to "Sheet Inputs, cell C14".
 4. **Chunk.** Structure-aware chunking (headings, clauses, table rows) with 300-600 tokens per chunk and overlap; each chunk records page range and section path. Contract clauses are kept whole where possible.
 5. **Embed and index.** Multilingual embeddings (Voyage voyage-3.5 via API, or BGE-M3 self-hosted); stored in pgvector with an HNSW index. Full-text index built in parallel for exact terms, numbers and names.
-6. **Extract claims.** A structured-output prompt to the extraction model (Claude Sonnet 5 for cost, Claude Opus 5 for complex financial documents) returns claims as JSON validated against a schema. Values are normalised (currency to ISO code, numbers to base units, dates to ISO 8601, Arabic numerals handled). Each claim keeps the verbatim quote and page.
+6. **Extract claims.** A structured-output prompt to the extraction model (Claude Sonnet 5 for cost, Claude Opus 5 for complex financial documents) returns claims as JSON validated against a schema. Values are normalised (currency to ISO code, numbers to base units, dates to ISO 8601, and locale-specific number and date formats normalised). Each claim keeps the verbatim quote and page.
 7. **Compare.** For each new claim, find claims with the same normalised entity and attribute across other documents. Numeric: conflict if the difference exceeds a tolerance (configurable, default 0.5%). Dates: conflict if different, unless one document supersedes the other. Text terms: an LLM adjudication pass decides agrees / conflicts / unclear with a rationale. Conflicts become findings.
 8. **Check gaps.** Re-evaluate decision checklists that reference the affected organisations or decision types; update missing-evidence findings. Detect dangling references ("Annex B", "the schedule attached") with no matching document.
 9. **Notify and audit.** Owners of affected findings are notified; every step logs to audit with timings and model usage.
@@ -231,7 +231,7 @@ All tables carry: id (UUID), tenant_id, created_at, created_by, updated_at, upda
 ## 9.2 Answering pipeline (System 1)
 
 1. **Authorise.** Resolve the user's permitted document set (roles plus per-document ACLs). This filter is applied inside the retrieval query, never after.
-2. **Understand the question.** Detect language (Arabic or English); expand with synonyms and normalised entity names from the registry; identify if the question is about a figure, a date, a term, a status or a comparison.
+2. **Understand the question.** Detect the language of the question; expand with synonyms and normalised entity names from the registry; identify if the question is about a figure, a date, a term, a status or a comparison.
 3. **Retrieve.** Hybrid retrieval: top 40 by vector similarity and top 40 by full-text match, fused (reciprocal rank fusion). If the question names an entity or attribute that exists in the claims ledger, ledger rows are added as high-priority evidence.
 4. **Re-rank.** A cross-encoder re-ranker (Voyage rerank-2.5 or self-hosted bge-reranker-v2-m3) orders the fused set; the top 8-12 passages go to the model.
 5. **Generate.** The answer model (Claude Opus 5 by default; Claude Sonnet 5 for routine lookups; in-region model under Pattern B/C when classification requires) receives the passages with document titles and pages, and a system instruction that forbids outside knowledge and requires a citation for each statement. Structured output returns the answer, a list of citations, and a confidence label.
@@ -293,7 +293,7 @@ All endpoints require a bearer token from the identity provider; service-to-serv
 %widths 20,40,40
 | Aspect | Pilot (Tier 0-1) | Enterprise / sovereign (Tier 2-3) |
 |---|---|---|
-| Hosting | Vercel (web) + Supabase (PostgreSQL, storage, auth) or a single cloud account in a GCC region; containers for the intelligence service | Kubernetes or managed containers (AWS ECS/EKS, Azure AKS) in a GCC region or private data centre; GPU node pool for in-region models |
+| Hosting | Vercel (web) + Supabase (PostgreSQL, storage, auth) or a single cloud account in a Malaysian or Singapore region; containers for the intelligence service | Kubernetes or managed containers (AWS ECS/EKS, Azure AKS) in a Malaysian or Singapore region or a private data centre; GPU node pool for in-region models |
 | Environments | dev, demo, pilot | dev, test, staging, production, plus disaster-recovery region |
 | Infrastructure as code | Terraform from day one; the client's account, our automation | Terraform; policy-as-code; change approval |
 | CI/CD | GitHub Actions: tests, security scans, container build, deploy | Same, plus signed images, manual production gate |
@@ -333,7 +333,7 @@ Large language models are probabilistic. The system is engineered so that errors
 %widths 30,70
 | Requirement | Target |
 |---|---|
-| Languages | English and Arabic in interface, documents and answers; right-to-left layout |
+| Languages | English as the primary business language, with the interface, documents and answers supporting the other languages present in the corpus (Bahasa Malaysia, Filipino and Chinese are the likely candidates, to be confirmed at discovery); right-to-left layout supported if it is needed later |
 | Document formats | PDF (digital and scanned), DOCX, XLSX, PPTX, EML/MSG, images (JPG/PNG scans) |
 | Corpus size | Pilot: up to 5,000 documents / 150,000 pages; enterprise: millions of pages with the same architecture |
 | Concurrency | Pilot: 25 concurrent users; enterprise: 500+ with horizontal scaling |

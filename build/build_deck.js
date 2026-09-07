@@ -58,7 +58,7 @@ function img(s, file, x, y, w, h) {
   const items = [
     ["Your brief, played back", "The four things System 1 must do, the five things System 2 must do, and the cross-cutting asks."],
     ["Our approach", "One shared platform, two independently usable products; how each requirement is met."],
-    ["Data, security and residency", "Where data lives, who sees what, and the honest position on AI processing in the GCC."],
+    ["Data, security and residency", "Where data lives, who sees what, and the honest position on where AI processing actually happens."],
     ["Plugging in real data later", "Configuration, import templates and connectors: no rebuild."],
     ["Timeline and commercial model", "Demo at week 8-9, production at week 20; run-cost tiers; pricing structure; you own everything."],
     ["Needs, gaps and next steps", "Inputs from you and the decisions that make the project succeed."],
@@ -70,7 +70,7 @@ function img(s, file, x, y, w, h) {
     s.addText(h, { x: x + 0.55, y: y, w: 3.9, h: 0.35, fontSize: 14, bold: true, color: NAVY, fontFace: FONT_B, isTextBox: true, margin: 0 });
     s.addText(b, { x: x + 0.55, y: y + 0.35, w: 3.9, h: 0.7, fontSize: 11, color: "444444", fontFace: FONT_B, isTextBox: true, margin: 0, valign: "top" });
   });
-  s.addNotes("Walk the agenda in 30 seconds. Signal that section 3 (data and residency) is where you will be most candid, because it is the section where GCC clients most often get vague answers from vendors.");
+  s.addNotes("Walk the agenda in 30 seconds. Signal that section 3 (data and residency) is where you will be most candid, because it is the section where clients most often get vague answers from vendors.");
 }
 
 // ---------------------------------------------------------------- 3 Brief: System 1
@@ -90,13 +90,13 @@ function img(s, file, x, y, w, h) {
     { text: "Users: ", options: { bold: true, color: GOLD } }, { text: "management.   ", options: { color: WHITE } },
     { text: "Character: ", options: { bold: true, color: GOLD } }, { text: "a closed-domain RAG system with a verification and audit layer on top.", options: { color: WHITE } },
   ], { x: 0.75, y: 3.95, w: 8.5, h: 0.85, fontSize: 13, fontFace: FONT_B, isTextBox: true, margin: 0, valign: "middle" });
-  s.addNotes("Read the four requirements back in the client's own words. Then ask: have we understood this correctly? Listen for anything new, for example additional document types, other user groups, or Arabic. Note it visibly. Do not move on until they confirm.");
+  s.addNotes("Read the four requirements back in the client's own words. Then ask: have we understood this correctly? Listen for anything new, for example additional document types, other user groups, or languages beyond English. Note it visibly. Do not move on until they confirm.");
 }
 
 // ---------------------------------------------------------------- 4 Brief: System 2
 {
   const s = base();
-  title(s, "Your brief, as we understood it: System 2", "CRM + Follow-up System across investors, partners/counterparties and customers/members, with a GCC-specific pipeline");
+  title(s, "Your brief, as we understood it: System 2", "CRM + Follow-up System across investors, partners/counterparties and customers/members, with a GCC pipeline for the market you are entering");
   const reqs = [
     ["Records and stages", "Contact and relationship records with stage and status tracking: initial contact, qualification, active discussion, dormant."],
     ["Follow-ups", "Scheduling and reminders so relationships do not slip."],
@@ -106,7 +106,7 @@ function img(s, file, x, y, w, h) {
   reqs.forEach(([h, b], i) => card(s, 0.5 + i * 2.3, 1.5, 2.15, 2.0, h, b, i === 2 ? "FBF3DC" : (i % 2 ? ICE : LIGHT), i === 2 ? "8A6D0B" : NAVY));
   s.addText("Cross-cutting asks", { x: 0.5, y: 3.7, w: 4, h: 0.3, fontSize: 13, bold: true, color: TEAL, fontFace: FONT_B, isTextBox: true, margin: 0 });
   s.addText(bullets(["Proposed build approach and tools for each system (same platform or different)", "A structure that accepts real data later without a rebuild", "Timeline to a working structure and demo", "Cost or pricing model"], 12), { x: 0.5, y: 4.0, w: 9, h: 1.1, isTextBox: true, margin: 0, valign: "top" });
-  s.addNotes("Emphasise that we took the human-approval requirement as a hard design constraint, not a feature toggle: there is no automated path to an external contact in the system; reminders go to staff only. Confirm the three categories and ask what is specific about their GCC pipeline (intermediaries, majlis meetings, regulatory steps), which we will configure rather than hard-code.");
+  s.addNotes("Emphasise that we took the human-approval requirement as a hard design constraint, not a feature toggle: there is no automated path to an external contact in the system; reminders go to staff only. Confirm the three categories, and ask how a GCC relationship differs from one in Malaysia or the Philippines (intermediaries, longer trust-building, regulatory steps), which we will configure rather than hard-code.");
 }
 
 // ---------------------------------------------------------------- 5 Our answer
@@ -142,7 +142,7 @@ function img(s, file, x, y, w, h) {
   const s = base();
   title(s, "System 1: shows its work, checks its homework", "Retrieval-augmented generation with citations, a grounding check and refusal when the documents do not contain the answer");
   img(s, "02_eia_pipeline.png", 0.5, 1.3, 9, 3.8);
-  s.addNotes("Two flows. Ingestion happens once per document: scan, classify, parse including OCR for scans in Arabic and English, chunk with page references, index, and extract claims. Answering happens per question: apply the user's permissions first, retrieve by keyword and by meaning, re-rank, draft an answer with citations, then the gold box: an independent grounding check that removes any sentence the sources do not support. If nothing survives, the assistant says the documents do not contain the answer. Everything is logged. Phrase: 'it shows its work, and a second check marks its homework'.");
+  s.addNotes("Two flows. Ingestion happens once per document: scan, classify, parse including OCR for scans in whatever languages the documents are in, chunk with page references, index, and extract claims. Answering happens per question: apply the user's permissions first, retrieve by keyword and by meaning, re-rank, draft an answer with citations, then the gold box: an independent grounding check that removes any sentence the sources do not support. If nothing survives, the assistant says the documents do not contain the answer. Everything is logged. Phrase: 'it shows its work, and a second check marks its homework'.");
 }
 
 // ---------------------------------------------------------------- 8 Claims ledger
@@ -150,14 +150,14 @@ function img(s, file, x, y, w, h) {
   const s = base();
   title(s, "Contradictions need structure, not just search", "A claims ledger extracts every figure, date and term with its source, then compares like with like across the whole document set");
   img(s, "03_claims_ledger.png", 0.5, 1.3, 9, 3.8);
-  s.addNotes("This is the differentiator. Walk the example: the contract says AED 12.5m, the board memo says 11.8m, the financial model says 12.5m. Each becomes a row: entity, attribute, value, unit, page, exact quote. Comparing rows about the same entity and attribute finds the conflict, and the flag shows both quotes. Decision checklists (bottom) are configured once per decision type; the system marks evidence as present, missing or contradicted. Mention version handling: a superseded draft is not reported as a contradiction of the final.");
+  s.addNotes("This is the differentiator. Walk the example: the contract says MYR 12.5m, the board memo says 11.8m, the financial model says 12.5m. Each becomes a row: entity, attribute, value, unit, page, exact quote. Comparing rows about the same entity and attribute finds the conflict, and the flag shows both quotes. Decision checklists (bottom) are configured once per decision type; the system marks evidence as present, missing or contradicted. Mention version handling: a superseded draft is not reported as a contradiction of the final.");
 }
 
 // ---------------------------------------------------------------- 9 CRM pipelines
 {
   const s = base();
-  title(s, "System 2: pipelines per category", "Three categories with a GCC-specific path. Stages, SLAs and exit criteria are configuration; relationship managers see a board, leadership sees the whole picture");
-  const stages = ["Introduction", "First meeting / majlis", "NDA", "Qualification", "Active discussion", "Term sheet / MoU", "Regulatory / board approval", "Signed"];
+  title(s, "System 2: pipelines per category", "Three categories plus a GCC path for the market you are entering. Stages, SLAs and exit criteria are configuration; relationship managers see a board, leadership sees the whole picture");
+  const stages = ["Introduction", "First meeting", "NDA", "Qualification", "Active discussion", "Term sheet / MoU", "Regulatory / board approval", "Signed"];
   const w = 1.12, x0 = 0.5;
   stages.forEach((t, i) => {
     s.addShape(pres.ShapeType.chevron, { x: x0 + i * (w - 0.02), y: 1.45, w: w + 0.1, h: 0.75, fill: { color: i < 4 ? TEAL : NAVY }, line: { color: WHITE, width: 1 } });
@@ -185,9 +185,9 @@ function img(s, file, x, y, w, h) {
 // ---------------------------------------------------------------- 11 Residency
 {
   const s = base();
-  title(s, "Data residency is a policy setting, not a rebuild", "Data at rest in a GCC region from day one; AI processing routed by classification; a fully sovereign option designed in");
+  title(s, "Data residency is a policy setting, not a rebuild", "Data at rest in Malaysia from day one; AI processing routed by classification; a fully sovereign option designed in");
   img(s, "05_residency_patterns.png", 0.5, 1.3, 9, 3.8);
-  s.addNotes("Be precise here. Data at rest: your cloud account, a GCC region (AWS UAE or Bahrain, Azure UAE North, Google Cloud Dammam), or on premises. Data in processing: with Pattern A, only the passages needed for a question go to the model, encrypted, under enterprise terms that prohibit training. As of early 2026, Claude on AWS in the Middle East regions uses cross-region inference, so processing may transit outside the region; a fully in-country frontier endpoint was not confirmed and we will re-verify at discovery. Pattern B routes restricted and personal-data documents to an in-region model. Pattern C runs everything in country on open-weight models at higher cost. Recommendation: start on A for the demo, design for B, keep C as the upgrade path.");
+  s.addNotes("Be precise here, and do not overclaim. Data at rest: your own cloud account in Malaysia (AWS ap-southeast-5, opened 2024, or Azure Malaysia West, opened 2025), or on premises. Be straight about the Philippines: none of the major providers has a full region there, so Philippine data sits in Singapore or in Malaysia unless you host it yourselves. AWS has a Manila Local Zone but that is a latency extension of Singapore, not a region. Saying this plainly is worth more than a vague answer they will check later. Data in processing: with Pattern A, only the passages needed for a question go to the model, encrypted, under enterprise terms that prohibit training. As of early 2026, Claude on Bedrock uses cross-region inference, so processing may leave the country; a frontier endpoint pinned inside Malaysia or the Philippines was not confirmed and we will re-verify at discovery. Pattern B routes restricted and personal-data documents to an in-region model. Pattern C runs everything in one named country on open-weight models at higher cost. Recommendation: start on A for the demo, design for B, keep C as the upgrade path. If they ask about the GCC entity: same machinery, a different region setting, no rebuild.");
 }
 
 // ---------------------------------------------------------------- 12 Security & trust
@@ -200,7 +200,7 @@ function img(s, file, x, y, w, h) {
     ["Immutable audit trail", "Every view, question, answer, finding, approval and send is logged with hash chaining; exportable to your SIEM."],
     ["No training on your data", "Enterprise terms with providers; zero or limited retention where offered; self-hosting removes third parties entirely."],
     ["Measured accuracy", "A golden question set agreed with you; every release scored on faithfulness, citations, extraction precision and correct refusals."],
-    ["Compliance by design", "Consent and lawful basis per contact; residency per jurisdiction; retention and deletion; supports Saudi PDPL, UAE PDPL, DIFC and ADGM regimes."],
+    ["Compliance by design", "Consent and lawful basis per contact; residency per jurisdiction; retention and deletion; built around the Malaysian PDPA as amended and the Philippine Data Privacy Act."],
   ];
   rows.forEach(([h, b], i) => {
     const col = i % 2, row = Math.floor(i / 2);
@@ -275,9 +275,9 @@ function img(s, file, x, y, w, h) {
   const s = base();
   title(s, "What we need, and what the brief did not cover", "Decisions that make the project succeed, best taken in discovery");
   s.addText("What we need to start", { x: 0.5, y: 1.35, w: 4.3, h: 0.35, fontSize: 14, bold: true, color: TEAL, fontFace: FONT_B, isTextBox: true, margin: 0 });
-  s.addText(bullets(["A named sponsor and a product owner who can decide weekly", "50-200 sample documents under NDA: mixed formats, both languages, some scanned", "The five to ten decisions management makes most often, and the evidence expected for each", "Jurisdiction, data classification rules and preferred cloud provider", "Identity provider and mailbox platform details"], 11.5), { x: 0.5, y: 1.75, w: 4.3, h: 3.2, isTextBox: true, margin: 0, valign: "top" });
+  s.addText(bullets(["A named sponsor and a product owner who can decide weekly", "50-200 sample documents under NDA: mixed formats, a spread of languages, some scanned", "The five to ten decisions management makes most often, and the evidence expected for each", "Jurisdiction, data classification rules and preferred cloud provider", "Identity provider and mailbox platform details"], 11.5), { x: 0.5, y: 1.75, w: 4.3, h: 3.2, isTextBox: true, margin: 0, valign: "top" });
   s.addText("Not in the brief: decide early", { x: 5.2, y: 1.35, w: 4.3, h: 0.35, fontSize: 14, bold: true, color: GOLD, fontFace: FONT_B, isTextBox: true, margin: 0 });
-  s.addText(bullets(["Arabic-language documents and interface (we assume yes)", "Document version control: drafts vs finals", "Who adjudicates a flagged contradiction", "Consent and lawful basis for investor personal data under GCC data protection laws", "Integration with existing systems: ERP, document management, existing CRM", "Accuracy acceptance criteria; support and disaster-recovery expectations"], 11.5), { x: 5.2, y: 1.75, w: 4.3, h: 3.2, isTextBox: true, margin: 0, valign: "top" });
+  s.addText(bullets(["Which languages appear in your documents, and in what share", "Document version control: drafts vs finals", "Who adjudicates a flagged contradiction", "Whether Philippine personal data may be stored in Malaysia or Singapore", "Integration with existing systems: ERP, document management, existing CRM", "Accuracy acceptance criteria; support and disaster-recovery expectations"], 11.5), { x: 5.2, y: 1.75, w: 4.3, h: 3.2, isTextBox: true, margin: 0, valign: "top" });
   s.addNotes("Frame the right-hand column as 'decisions that make the project succeed', not as criticism of the brief. Each has a recommended default in our gaps document. Ask directly for the left-hand items, especially the sample documents and the sponsor.");
 }
 
