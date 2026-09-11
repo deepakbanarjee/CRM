@@ -1,266 +1,285 @@
 # ABLife AI & CRM — Shared Project Memory
 
-**Purpose:** This file is the shared continuity record for ChatGPT, Claude, Antigravity, human reviewers, and any other agent working in this repository.
+**Purpose:** This is the mandatory continuity and control record for ChatGPT, Claude, Antigravity, human reviewers, contractors, and any other agent working in this repository.
 
-**Mandatory agent rule:** READ THIS FILE IN FULL BEFORE STARTING ANY TASK IN THIS REPOSITORY. After completing a material task, update the change log at the end of this file with what changed, what was verified, what remains open, and any new decision required.
+> **MANDATORY:** READ THIS FILE IN FULL BEFORE STARTING ANY TASK IN THIS REPOSITORY. After every material task, update the Change Log with what changed, verification performed, open decisions/blockers, and the next safe action.
 
-Last updated: 2026-09-10
-Current repository: `deepakbanarjee/CRM`
-Current working/default branch: `claude/ai-executive-intelligence-plan-kcgdni`
+Last updated: 2026-09-11  
+Repository: `deepakbanarjee/CRM`  
+Current approved/base branch: `claude/ai-executive-intelligence-plan-kcgdni`  
+Current document-review branch: `docs/v0.2-scalability-governance`
 
 ---
 
 ## 1. Current project state
 
-This repository is currently a **proposal/document-generation repository, not a running CRM or Evidence Assistant application**. The existing `proposal/` and `build/` trees contain proposal artefacts and generators. Do not assume production application code exists unless a later commit explicitly adds and documents it.
+This repository is currently a **proposal/document-generation repository, not a running CRM or Evidence Assistant application**. Do not assume production application code exists unless a later approved change explicitly adds and documents it.
 
-The project direction is now governed by the ABLife 90-Day Pilot Plan, the ABLife ownership/governance structure, approved Management decisions, and the controlled PRD process developed from those sources.
+The project direction is governed by:
+
+1. recorded Management/Board approvals and decisions;
+2. the latest approved ABLife ownership/governance/operations/centralization model;
+3. the latest approved ABLife AI & CRM 90-Day Pilot Plan;
+4. approved PRD sections/change requests/project decisions;
+5. latest consultant-approved/revised project documents;
+6. older proposal-package material;
+7. technical recommendations and temporary assumptions.
+
+If authoritative sources conflict, do not silently reconcile them. Record **DECISION REQUIRED** and identify the required decision authority.
 
 ### Current execution status
 
-- **Allowed now:** requirements engineering, governance mapping, repository audit, architecture definition, infrastructure planning, security/privacy design, vendor evaluation, cost modelling, test design, schedule design, decision/question registers, PRD preparation, and review.
-- **On hold:** product coding, production schema implementation, live-data ingestion, live-contact migration, production integrations, and deployment.
-- **Reason:** no application coding is to begin until the Master PRD, relevant architecture, governance requirements, and the applicable section/gate are formally approved.
+**Allowed now:** requirements engineering, governance mapping, repository/document audit, architecture definition, infrastructure planning, security/privacy design, existing-system/CRM fit-gap discovery, vendor evaluation, cost modelling, test design, schedule design, decision/question registers, PRD preparation, controlled document revision and review.
+
+**On hold:** application coding, production schema implementation, live-data ingestion, live-contact migration, production integrations and deployment.
+
+**Reason:** no application coding may begin until the Master PRD, applicable architecture/governance requirements and the relevant section/gate are approved in writing.
+
+### Current controlled planning documents
+
+Version `v0.2` is a **controlled draft for review, not an approved implementation baseline**:
+
+- `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Architecture_Plan_v0.2.md`
+- `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Full_Stack_Technology_Plan_v0.2.md`
+- `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Development_Stage_by_Stage_v0.2.md`
+
+Versioning policy, change log and binary artifact hashes are maintained under `project-docs/controlled/`.
 
 ---
 
-## 2. Source precedence
-
-When sources conflict, do not silently choose one. Use the following precedence unless Management explicitly records a different order:
-
-1. Recorded Management/Board decisions and formal approvals.
-2. Latest approved ABLife ownership, governance, operations, and centralization model.
-3. Latest approved ABLife AI & CRM 90-Day Pilot Plan.
-4. Latest approved PRD section, change request, or written project decision.
-5. Latest consultant-approved/revised project documents.
-6. Older proposal-package documents already in this repository.
-7. Technical recommendations and temporary assumptions.
-
-If two higher-priority sources conflict, stop and create a **DECISION REQUIRED** item. Never resolve governance, authority, legal-entity ownership, privacy, or compliance conflicts by inference.
-
----
-
-## 3. HARD RULES — DO NOT BREAK
+## 2. HARD RULES — DO NOT BREAK
 
 ### HR-01 — Read memory first
-Every agent must read `PROJECT_MEMORY.md` before making any change. Read `HANDOFF.md` as historical context where relevant, but `PROJECT_MEMORY.md` is the current coordination entry point.
+Every agent must read `PROJECT_MEMORY.md` before any work. Read `HANDOFF.md` only as historical context where relevant. `PROJECT_MEMORY.md` is the current coordination entry point.
 
 ### HR-02 — No coding before approval
-Do not add or materially modify application code, database schemas, live integrations, deployment infrastructure, or production configuration until the Master PRD and the applicable section/gate are approved in writing.
+Do not add or materially modify application code, database schemas, live integrations, deployment infrastructure or production configuration until the Master PRD and applicable section/gate are approved in writing.
 
 ### HR-03 — Section-by-section authorization
 Delivery follows:
 
-`DEFINE → REVIEW → APPROVE → BUILD → TEST → UAT → ACCEPT → RELEASE`
+`DEFINE → REVIEW → APPROVE → BUILD/CONFIGURE → TEST → UAT → ACCEPT → RELEASE`
 
-Do not build a section merely because a prior section has finished. Dependent work moves only after its defined approval/exit criteria are met. Independent work may run in parallel only if the approved plan permits it.
+Dependent work proceeds only after exit criteria are met. Independent work may run in parallel only if the approved delivery plan permits it.
 
 ### HR-04 — No assumptions disguised as requirements
-Every material statement must be classified when needed as one of:
+Use these classifications where material:
 
 - **CONFIRMED REQUIREMENT**
 - **DERIVED REQUIREMENT**
 - **DECISION REQUIRED**
 - **RECOMMENDATION**
 
-Never silently convert a recommendation, consultant comment, temporary assumption, or older proposal statement into an approved requirement.
+Never convert a recommendation, consultant observation, temporary assumption or older proposal statement into an approved requirement without approval.
 
 ### HR-05 — Do not hallucinate missing implementation details
-If the repository or approved source does not prove a technical, legal, commercial, organizational, or workflow detail, mark it `TBD`, `UNKNOWN`, or `DECISION REQUIRED`.
+If an approved source or repository evidence does not prove a technical, legal, commercial, organizational or workflow detail, mark it `TBD`, `UNKNOWN` or `DECISION REQUIRED`.
 
 ### HR-06 — Preserve the two-pilot boundary
-Treat these as separate, independently gateable products:
+Treat these as separate and independently gateable products:
 
 1. **Evidence & Executive Intelligence Assistant**
 2. **Human-Approved Strategic Relationship CRM**
 
-Shared identity, security, governance, audit, and approved interfaces are allowed. Do not collapse them into one inseparable system.
+They may share approved identity, policy, security, audit, workflow/approval foundations and interfaces, but must not become one inseparable product.
 
 ### HR-07 — Human approval for sensitive outbound
-No autonomous external sending. Sensitive outbound communication must retain the required human approval path. Draft authors must not self-approve sensitive outbound content where the approved plan prohibits it.
+No autonomous external sending in the pilot. Sensitive outbound must use the approved human workflow. A draft author must not self-approve sensitive outbound where prohibited by the approved plan.
 
 ### HR-08 — Legal entities are not departments
-ABLife Holding and the five subsidiaries must not be modelled as one flat company without explicit approval. Distinguish:
+ABLife Holding and subsidiaries must not be modelled as one flat company without explicit approval. Distinguish:
 
-- visibility,
-- operational responsibility,
-- legal authority,
-- data ownership,
-- relationship ownership,
+- visibility;
+- operational responsibility;
+- legal authority;
+- data ownership/control;
+- relationship ownership;
 - contracting responsibility.
 
 One does not imply another.
 
 ### HR-09 — Least privilege and separation of duties
-Do not assume an administrator, Group role, or central function has unrestricted visibility or authority. Access must be explicitly mapped by approved role/entity/function/project/matter scope.
+Do not assume administrators, Group roles, central functions, contractors or AI agents have unrestricted access. Scope access by approved identity/role/entity/function/project/matter/action and record privileged access.
 
 ### HR-10 — Plug-and-play architecture
 External providers should be isolated behind documented interfaces/adapters wherever technically practical. Provider configuration must be externalized. Do not hard-wire vendor-specific business logic unless an approved exception is documented.
 
-Each stateful external component should have, where applicable:
+Each stateful external component should document, where applicable:
 
-- interface contract,
-- configuration contract,
-- authentication method,
-- health/failure behaviour,
-- timeout/retry rules,
-- audit behaviour,
-- export method,
-- migration procedure,
-- rollback procedure,
-- replacement/contract tests,
-- documented service impact during replacement.
+- interface and configuration contract;
+- authentication;
+- health/failure behaviour;
+- timeout/retry/idempotency rules;
+- audit behaviour;
+- export method;
+- migration and rollback procedure;
+- replacement/contract tests;
+- expected service impact during replacement.
 
-Do not promise universal zero-downtime replacement unless the architecture and tests prove it.
+Do not promise universal zero-downtime replacement unless the approved architecture and tests prove it.
 
-### HR-11 — No vendor preselection without evidence
-Do not present an illustrative/reference full-stack stack as an approved stack. Stage 1 must first discover existing corporate systems and compare configuration/reuse against custom/hybrid development. Any provider named before approval is a candidate or reference option only.
+### HR-11 — No vendor or custom-stack preselection
+Reference technologies and diagrams are candidates, not approved purchases or implementation decisions. Stage 1 must first discover ABLife's existing corporate systems, especially the current CRM/contact system, then compare configure/reuse vs extension/hybrid vs custom development.
 
 ### HR-12 — Reuse before purchase/build
-Before recommending a new identity, email, calendar, document repository, CRM, cloud, or security product, inventory what ABLife already uses and assess fitness, data terms, governance, exportability, and cost.
+Before recommending a new identity, email, calendar, document repository, CRM, cloud/security product or infrastructure service, inventory what ABLife already uses and assess fit, data terms, governance, exportability, security and cost.
 
 ### HR-13 — Production/live data remains gated
-Do not put production data into developer logs, synthetic/test environments, personal tools, or unapproved services. Live contacts and production document ingestion require the applicable documented gate approval.
+Do not put production data in developer logs, synthetic/test environments, contractor-owned storage, personal tools or unapproved services. Live contacts and production document ingestion require the applicable written gate approval.
 
 ### HR-14 — Evidence Assistant must fail safely
-The Evidence Assistant must not fill evidence gaps with unstated assumptions. It must preserve source status/version, enforce access before model exposure, surface absence/conflict, and leave legal/factual resolution to authorized humans.
+The Evidence Assistant must not fill evidence gaps with unstated assumptions. It must preserve source status/version, apply authorization before model exposure, surface absence/conflict and leave legal/factual resolution to authorized humans.
 
-### HR-15 — Generated documents: edit sources, not only outputs
-For proposal artefacts generated from `build/`, update the relevant source generator first, regenerate outputs, recalculate spreadsheets where required, render/inspect PDFs or images, and verify no regressions before committing. Do not patch only a generated `.docx`, `.pdf`, `.xlsx`, or image if the source generator would later overwrite the change.
+### HR-15 — Generated documents: edit controlled sources and regenerate
+For generated proposal artifacts, update the authoritative editable source first, regenerate derived outputs, recalculate workbooks where required, render/inspect outputs and verify regressions before committing. Do not patch only a generated output if its source will overwrite it later.
 
 ### HR-16 — Preserve known wording corrections
 Do not regress previously corrected overclaims. In particular:
 
-- use **tamper-evident**, not tamper-proof, unless stronger properties are actually proven;
-- do not claim there is no automated sending path if internal staff reminders are automated;
-- do not claim every sentence is cited when the supported behaviour is answer-level citation;
-- do not claim every figure/date is detected when extraction cannot guarantee that.
+- use **tamper-evident**, not tamper-proof, unless stronger properties are proven;
+- do not claim there is no automated sending path when internal staff reminders may be automated;
+- do not claim every sentence is cited when the supported behavior is answer-level citation;
+- do not claim every figure/date is detected when extraction cannot guarantee it.
 
 ### HR-17 — Verify before write
-Before editing any existing file:
+Before editing an existing repository file:
 
-1. fetch/read the current version from GitHub;
-2. check whether another agent has changed it;
-3. identify the authoritative source for the requested change;
-4. make the smallest change needed;
+1. fetch/read the current version;
+2. check whether another agent changed it;
+3. identify the authoritative source/decision for the change;
+4. make the smallest justified change;
 5. re-fetch/inspect after writing;
-6. validate affected generated artefacts/tests where applicable;
-7. record the change in this memory.
+6. run/build/render/test as applicable;
+7. record the material work in this memory.
 
-Do not perform broad search-and-replace changes across client documents without source-by-source verification.
+No broad search/replace across client documents without source-by-source verification.
 
-### HR-18 — Consultant feedback currently pending, not authoritative text
-Consultant feedback received on 2026-09-10 is **for information only at this point**. The consultant will revise the affected documents and send updated versions. Do not pre-emptively rewrite those documents based only on the feedback screenshot. Record the feedback, wait for the revised source documents, then compare and update the repo from the authoritative revisions.
+### HR-18 — Consultant feedback authorization status
+The 2026-09-10 consultant feedback was initially information-only. **On 2026-09-11 the user explicitly authorized updating the three planning documents (Architecture, Full-Stack Technology, Development Stage-by-Stage) using that feedback plus the approved scalability/replication/customization direction. That later instruction supersedes the prior hold for those three documents only.**
+
+The separate **Full-Stack Development Subscription Cost Plan remains outside this v0.2 update** and should not be revised from the screenshot alone unless the user or consultant supplies/approves the revised basis.
 
 ### HR-19 — Third-party/contractor access is controlled
-Do not assume contractors, AI agents, or support personnel can access ABLife production data, credentials, environments, repositories, or documents. Any such access requires an approved operating model, minimum necessary privileges, revocation/offboarding, logging, and explicit ownership boundaries.
+Contractors, AI agents and support personnel do not receive default production-data, document, credential, environment or repository access. Access must be approved, named, minimum-necessary, logged, environment-specific and revocable. Temporary elevated access should be time-bound where practical.
 
 ### HR-20 — Update memory after material work
-After every material repository task, append to the Change Log:
+After every material task, record:
 
-- date/time,
-- agent/tool,
-- branch,
-- files changed,
-- reason/source,
-- verification performed,
-- decisions created/closed,
-- remaining blockers,
+- date/time;
+- agent/tool;
+- branch;
+- files changed;
+- source/reason;
+- verification performed;
+- decisions created/closed;
+- remaining blockers;
 - next safe action.
 
-If nothing was changed, record nothing.
+### HR-21 — Version control for all documents and repository work
+From 2026-09-11 onward, all material documents and repository work must use version control.
+
+- Never silently overwrite a controlled baseline.
+- Use dedicated review branches for material changes.
+- Controlled documents must carry a version and status.
+- Maintain a change log and artifact integrity record.
+- Use readable/diffable source formats in Git where binary document diffs are inadequate.
+- Exact distributed binary artifacts must be identifiable by version/hash where practical.
+- Material changes must be visibly identifiable during review (v0.2 uses yellow highlights in DOCX and `[V0.2 CHANGE]` markers in Markdown).
+- A newer repository version is not an approved baseline merely because it exists.
+- Merge/adoption into the approved baseline occurs only after the required review/approval.
 
 ---
 
-## 4. Architecture principles currently agreed
+## 3. Architecture principles currently agreed for design review
 
-These are project-level constraints unless later superseded by approved documents:
+These are design constraints/recommendations reflected in the v0.2 controlled drafts; they do not authorize coding or procurement.
 
-1. Two logically separate pilots with shared governance/security controls.
-2. Minimum-necessary infrastructure for the 90-day pilot; no premature group-scale or sovereign build.
-3. External provider abstraction/adapter pattern where practical.
-4. Configuration-driven provider selection; no unnecessary business-logic coupling.
-5. Environment separation: Development, Test/UAT, Controlled Pilot at minimum once development is authorized.
-6. Least privilege, MFA/SSO where available, audit logging, backup/recovery, secrets management, and controlled offboarding.
-7. Evidence access filtering before AI/model exposure.
-8. Human approval for sensitive outbound communications.
-9. Data export and vendor-exit capability must be testable.
-10. No custom/hybrid implementation should be treated as pre-approved merely because a reference stack diagram exists.
+1. **Two independently gateable products** on shared approved governance/security foundations.
+2. **One core platform / one codebase where custom development is approved**, rather than separate code forks by subsidiary or jurisdiction.
+3. **Control Plane vs Data Plane separation**: configuration/policy/deployment profiles are separate from business data.
+4. **Configuration-driven customization** for legal-entity hierarchy, roles, workflows, approvals, feature flags, provider registry, branding/localization and deployment profiles.
+5. **Existing CRM first**: discovery and fit-gap precede any custom CRM decision.
+6. **CRM abstraction/adapters** where an existing or future CRM is integrated.
+7. **Provider plugin/integration registry** with stable internal contracts.
+8. **ABLife-owned/controlled environments** preferred for source repository, cloud/provider accounts, CI/CD, secrets, databases, storage, backups, monitoring and root/recovery credentials.
+9. **No-document-sharing operating mode**: authoritative documents remain inside approved ABLife boundaries; developers/support normally use synthetic/redacted fixtures and sanitized diagnostics.
+10. **Controlled third-party support access**, with rapid revocation/offboarding and secret rotation where appropriate.
+11. **Deployment profiles/packs** to support CRM-only, Evidence-only, combined, no-document-sharing and future approved entity/jurisdiction profiles without code forks.
+12. **Logical data partitioning first**, with a path to stronger physical isolation only when legal/residency/scale evidence justifies it.
+13. **AI/model abstraction** through a model gateway/orchestrator rather than direct vendor-specific calls from domain modules.
+14. **Workflow and approval policies as configuration/data**, not scattered hard-coded conditions.
+15. **Modular monolith first for an approved custom/hybrid pilot**, with explicit module boundaries and event-ready contracts; do not introduce premature microservices/event infrastructure.
+16. **Infrastructure-as-Code and versioned configuration** for repeatable environments after implementation authorization.
+17. **Data export/vendor exit, backup/recovery and provider migration** must be testable before scale.
+18. **Minimum-necessary infrastructure** for the 90-day pilot; no premature group-scale, Kubernetes, GPU fleet or sovereign build without an approved requirement.
 
 ---
 
-## 5. Development process currently agreed
+## 4. Development process currently agreed
+
+### Pre-Day-1 mobilization — v0.2 recommendation
+Before the 90-day operational clock, establish:
+
+- development/configuration partner selection criteria;
+- NDA/confidentiality, IP, data/access, security, subcontractor and exit/handover terms;
+- ABLife-owned/controlled repository/environment/account model;
+- named third-party access and revocation model;
+- no-document-sharing development/support model;
+- acceptance/UAT/defect/support responsibilities;
+- the authority/event that formally declares Day 1.
+
+The exact contractual Day-1 rule remains a **DECISION REQUIRED** item.
 
 ### Pre-development
-No coding. Produce and approve:
+No application coding. Produce and approve:
 
-- Requirements Register
-- Governance Gap Register
-- Decision & Discovery Register
-- RACI / decision-rights matrix
-- Legal-entity model
-- Data model
-- Access/approval matrices
-- Architecture plan
-- Infrastructure bill of materials
-- Security/privacy design
-- Vendor evaluation
-- Test strategy
-- Cost model
-- Detailed task schedule
-- Master PRD
+- Requirements Register;
+- Governance Gap Register;
+- Decision & Discovery Register;
+- RACI / decision-rights matrix;
+- legal-entity model;
+- data model;
+- access/approval matrices;
+- architecture plan;
+- infrastructure bill of materials;
+- security/privacy design;
+- existing CRM/system fit-gap;
+- vendor evaluation;
+- test/acceptance strategy;
+- cost model;
+- detailed task schedule;
+- Master PRD.
 
 ### After approval
-Each independently approved section follows the controlled lifecycle and must meet its own definition of done, tests, UAT, and acceptance before dependent sections proceed.
+Each independently approved section follows the controlled lifecycle and must meet its definition of done, tests, UAT and acceptance before dependent sections proceed.
+
+Stage 2 must implement the approved **configure vs hybrid vs custom** path; capability sections do not automatically imply custom build.
 
 ---
 
-## 6. Repository state and interpretation
+## 5. Current v0.2 document-control status
 
-Current repository evidence indicates this branch is a **proposal pack and generator system**, not the actual future application. Therefore:
+Branch: `docs/v0.2-scalability-governance`
 
-- do not infer application frameworks/databases/authentication from proposal filenames;
-- do not claim CRM/Evidence functionality exists because requirements are documented;
-- do not estimate reuse of production application code until actual application code is present and audited;
-- treat existing architecture/cost/technology documents as historical proposal inputs unless they match the latest approved plan.
+Controlled policy files:
 
----
+- `project-docs/controlled/DOCUMENT_VERSIONING.md`
+- `project-docs/controlled/CHANGELOG.md`
+- `project-docs/controlled/ARTIFACT_MANIFEST.md`
 
-## 7. Consultant feedback received — WAIT FOR REVISED DOCUMENTS
+Controlled v0.2 sources:
 
-The user supplied consultant feedback on 2026-09-10 and explicitly instructed that no action be taken on the documents yet. The consultant will update them.
+- Architecture Plan v0.2
+- Full-Stack Technology Plan v0.2
+- Development Stage-by-Stage Plan v0.2
 
-The feedback summary is recorded here only so future agents know revisions are pending:
+Exact distributed DOCX artifact hashes and render-QA status are recorded in `ARTIFACT_MANIFEST.md`.
 
-1. **Full-Stack Development Subscription Cost Plan — major fix pending**
-   - rename/reframe it;
-   - remove ambiguity around the USD 1,500 allowance;
-   - separate contractor costs from ABLife-owned subscriptions;
-   - add missing total-cost categories.
-
-2. **90-Day Pilot Full-Stack Technology Plan — important fix pending**
-   - align with third-party outsourcing;
-   - make existing-CRM discovery the first decision;
-   - strengthen ABLife ownership/handover requirements;
-   - avoid appearing to preselect a custom stack.
-
-3. **90-Day Pilot Architecture Plan — important fix pending**
-   - add a no-document-sharing operating model;
-   - add third-party access restrictions;
-   - strengthen ABLife-owned environments, credential revocation, and controlled support access;
-   - remove the blank final page.
-
-4. **90-Day Pilot Development Stage-by-Stage — minor/moderate fix pending**
-   - add developer-selection and contracting steps;
-   - adjust the 90-day starting point;
-   - define measurable acceptance targets;
-   - clarify third-party responsibilities.
-
-**Action rule:** do not edit these four documents from this feedback alone. Wait for consultant-updated versions, then perform a controlled diff against repo/current project documents before adopting changes.
+**Status:** DRAFT FOR REVIEW. No application coding authorization, no production-data authorization and no procurement authorization is implied.
 
 ---
 
-## 8. Important unresolved decisions
+## 6. Important unresolved decisions
 
 Keep these open until authoritative answers are provided:
 
@@ -274,8 +293,9 @@ Keep these open until authoritative answers are provided:
 - Does Company Secretary require system access/workflow?
 - Which entity is data controller/owner for each relationship category?
 - Which entity contracts technology providers and pays/allocates costs?
-- What identity, email, calendar, document repository, CRM, cloud, and security systems already exist?
-- What jurisdictions, residency requirements, retention periods, and prohibited data categories apply?
+- What identity, email, calendar, document repository, CRM, cloud and security systems already exist?
+- Which existing CRM/contact system is assessed first and what fit-gap criteria determine configure vs hybrid vs custom?
+- What jurisdictions, residency requirements, retention periods and prohibited data categories apply?
 - What is the Management-confirmed flagship project and authorized evidence set?
 - What are the real document/contact/user volumes and languages?
 - Who resolves each category of evidence conflict?
@@ -285,38 +305,63 @@ Keep these open until authoritative answers are provided:
 - Is custom/hybrid development during the pilot approved, or must an established-platform configuration be selected?
 - Which components must be hot-swappable versus replaceable through controlled migration?
 - What downtime/recovery objectives apply by component?
+- Who selects/contracts the third-party developer and what capability/security/handover criteria apply?
+- What event formally starts Day 1 of the 90-day clock?
+- What third-party access is permitted by environment, and what exceptional production-document support path is allowed?
+- Which deployment profiles are required for the pilot?
 
 ---
 
-## 9. Agent operating protocol
+## 7. Agent operating protocol
 
-Before starting a task:
-
-1. Read this file.
+### Before starting any task
+1. Read this file in full.
 2. Read the relevant current source document(s) and current GitHub file(s).
-3. Check whether the task is permitted under the current gate/status.
-4. Identify exact requirements/decisions supporting the change.
-5. If authority is missing, stop and raise a question rather than assume.
+3. Confirm the task is permitted under the current gate/status.
+4. Identify the exact requirements/decisions supporting the task.
+5. Check the active branch and current file version.
+6. If authority is missing, stop and raise a question rather than assume.
 
-Before committing a change:
-
-1. Confirm the file has not changed since it was fetched.
-2. Make the minimum change.
+### Before committing any material change
+1. Re-fetch the file to detect concurrent-agent changes.
+2. Make only the justified change.
 3. Verify syntax/build/render/tests as applicable.
-4. Inspect generated artefacts where applicable.
-5. Recheck alignment with hard rules.
-6. Update this memory.
+4. Inspect generated artifacts where applicable.
+5. Recheck alignment with all hard rules.
+6. Update version/change records.
+7. Update this memory.
 
 ---
 
-## 10. Change Log
+## 8. Change Log
 
 ### 2026-09-10 — ChatGPT — project governance/memory initialization
 
 - **Branch:** `claude/ai-executive-intelligence-plan-kcgdni`
-- **Files created/updated:** `PROJECT_MEMORY.md` (created); additional entry-point pointers to be added separately.
-- **Reason/source:** user instructed that ChatGPT, Claude, and Antigravity must share a persistent repo-based memory, read it before every task, record work, and follow hard rules.
-- **Verification before change:** fetched current repository metadata, current `README.md`, current `HANDOFF.md`, and confirmed no existing `PROJECT_MEMORY.md` was present.
-- **Scope intentionally NOT changed:** no proposal document, architecture document, cost document, development plan, generator, application code, data model, or deployment configuration was modified. Consultant feedback was recorded as pending only, per user instruction.
-- **Current blockers:** consultant-revised documents not yet received; Master PRD not formally approved; no coding authorization.
-- **Next safe action:** add repository entry-point instructions so all agents are directed to read this file before work; then wait for an explicit task or authoritative revised consultant documents.
+- **Files changed:** `PROJECT_MEMORY.md` created.
+- **Reason:** user required persistent shared repo memory for ChatGPT, Claude, Antigravity and reviewers.
+- **Verification:** repository metadata, README and historical HANDOFF were checked; repository confirmed as proposal/document-generation package, not running application.
+- **Scope intentionally not changed:** no product/application code or client planning document was modified.
+- **Blockers:** Master PRD not approved; no coding authorization.
+
+### 2026-09-11 — ChatGPT — v0.2 controlled planning-document update
+
+- **Branch:** `docs/v0.2-scalability-governance`, created from commit `f75482817a21504a34b6ec6a81d67d9d1156ef64`.
+- **User authorization:** user explicitly required version control for all documents/work and instructed the three shared planning documents to be updated using the consultant feedback plus the newly defined scalable/replicable/customizable architecture direction, with changes clearly highlighted.
+- **Controlled files added:**
+  - `project-docs/controlled/DOCUMENT_VERSIONING.md`
+  - `project-docs/controlled/CHANGELOG.md`
+  - `project-docs/controlled/ARTIFACT_MANIFEST.md`
+  - `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Architecture_Plan_v0.2.md`
+  - `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Full_Stack_Technology_Plan_v0.2.md`
+  - `project-docs/controlled/v0.2/ABLife_90_Day_Pilot_Development_Stage_by_Stage_v0.2.md`
+- **Material architecture changes:** control-plane/data-plane model; one-core-platform/configuration approach; existing-CRM-first decision; CRM/provider adapters; ABLife-owned environments; no-document-sharing mode; controlled third-party access; credential revocation; deployment profiles/packs; scalable data partitioning; modular-monolith/event-ready scale path; IaC/versioned configuration.
+- **Material technology-plan changes:** custom stack explicitly conditional; existing-system fit-gap first; ABLife ownership/handover; third-party/no-document-sharing controls; control plane; deployment profiles; developer-independence requirements.
+- **Material development-plan changes:** pre-Day-1 developer selection/contracting/ownership/access controls; configurable 90-day start trigger; third-party vs ABLife responsibilities; existing-CRM-first discovery; configure/hybrid/custom Stage 2 split; measurable acceptance targets; P00 baseline; new clarification questions.
+- **Change marking:** v0.2 DOCX uses yellow highlights for material changes; Markdown companions use `[V0.2 CHANGE]` markers.
+- **Binary artifact verification:** exact v0.1/v0.2 DOCX SHA-256 hashes recorded in `ARTIFACT_MANIFEST.md`.
+- **Render QA:** Architecture v0.2 — 14 pages inspected, no trailing blank page; Full-Stack v0.2 — 14 pages inspected; Development v0.2 — 16 pages inspected. No clipping/overlap defects observed in the reviewed render set.
+- **Scope intentionally not changed:** no application source code, production schema, live integration or deployment configuration changed. The separate Full-Stack Development Subscription Cost Plan was not included in this v0.2 update.
+- **Current status:** v0.2 documents are controlled drafts for review, not approved implementation baselines.
+- **Remaining blockers:** Master PRD/gate approval; existing CRM/system inventory; legal-entity/access decisions; third-party contracting/access decisions; Day-1 trigger; vendor/residency/privacy/security decisions.
+- **Next safe action:** review the v0.2 branch and documents; resolve comments/decisions; merge/adopt only after the required approval. No application coding before that approval.
